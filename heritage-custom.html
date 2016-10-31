@@ -4,12 +4,16 @@
     font-weight: bold;
   }
 
-  div.checkbox-group input {
-    margin-right: 2px;
+  div.form-group input {
+    margin-right: 2px ;
   }
 
   div.note p {
     font-size: 15px !important;
+  }
+
+  div.form-group {
+    margin-bottom: 1em;
   }
 
 
@@ -18,19 +22,16 @@
 <!--This is validating at least 1 checked box on checkbox inputs-->
 
 <script type="text/javascript">
-  $(document).ready(function () {
-    $('#submit').click(function() {
-      checked = $("input[type=checkbox]:checked").length;
-
-      if(!checked) {
-        alert("You must check at least one checkbox.");
-        return false;
-      }
-
+$(function(){
+    var requiredCheckboxes = $('.options :checkbox[required]');
+    requiredCheckboxes.change(function(){
+        if(requiredCheckboxes.is(':checked')) {
+            requiredCheckboxes.removeAttr('required');
+        } else {
+            requiredCheckboxes.attr('required', 'required');
+        }
     });
-  });
-
-  $('div.checkbox-group.required :checkbox:checked').length > 0;
+});
 
 </script>
 
@@ -150,41 +151,41 @@
   </div>
 
 
-  <div class="form-field checkbox-group group-required">
-    <label for="community">At Which Community/Communities</label>
+  <div class="form-group options">
+    <label class="control-label" for="optiontext">At Which Community/Communities (select one)*</label>
 
-      <input type="checkbox" class="community group-required" name="checkbox-group" data-mapping="customer[community]" value="Heritage Pointe (Omaha, Neb.)">Heritage Pointe (Omaha, Neb.)<br>
-      <input type="checkbox" class="community group-required" name="checkbox-group" data-mapping="customer[community]" value="Heritage Ridge (Bellevue, Neb.)">Heritage Ridge (Bellevue, Neb.)<br>
-      <input type="checkbox" class="community group-required" name="checkbox-group" data-mapping="customer[community]" value="Orchard Pointe at Surprise (Surprise, Ariz.)">Orchard Pointe at Surprise (Surprise, Ariz.)<br>
-      <input type="checkbox" class="community group-required" name="checkbox-group" data-mapping="customer[community]" value="Orchard Pointe at Arrowhead (Glendale, Ariz.)">Orchard Pointe at Arrowhead (Glendale, Ariz.)<br>
-      <input type="checkbox" class="community group-required" name="checkbox-group" data-mapping="customer[community]" value="The Heritage at College View (Hastings, Neb.)">The Heritage at College View (Hastings, Neb.)<br>
-      <input type="checkbox" class="community group-required" name="checkbox-group" data-mapping="customer[community]" value="The Heritage at Fox Run (Council Bluffs, Iowa)">The Heritage at Fox Run (Council Bluffs, Iowa)<br>
-      <input type="checkbox" class="community group-required" name="checkbox-group" data-mapping="customer[community]" value="The Heritage at Legacy (Omaha, Neb.)">The Heritage at Legacy (Omaha, Neb.)<br>
-      <input type="checkbox" class="community group-required" name="checkbox-group" data-mapping="customer[community]" value="The Heritage at Meridian Gardens (Columbus, Neb.)">The Heritage at Meridian Gardens (Columbus, Neb.)<br>
-      <input type="checkbox" class="community group-required" name="checkbox-group" data-mapping="customer[community]" value="The Heritage at Northern Hills (Sioux City, Iowa)">The Heritage at Northern Hills (Sioux City, Iowa)<br>
-      <input type="checkbox" class="community group-required" name="checkbox-group" data-mapping="customer[community]" value="The Heritage at Sagewood (Grand Island, Neb.)">The Heritage at Sagewood (Grand Island, Neb.)<br>
-      <input type="checkbox" class="community group-required" name="checkbox-group" data-mapping="customer[community]" value="The Heritage at Shalimar Gardens (Fremont, Neb.)">The Heritage at Shalimar Gardens (Fremont, Neb.)<br>
-      <input type="checkbox" class="community group-required" name="checkbox-group" data-mapping="customer[community]" value="The Heritage at Sterling Ridge (Omaha, Neb.)">The Heritage at Sterling Ridge (Omaha, Neb.)<br>
+      <input type="checkbox" class="community group-required" name="checkbox-group[]" data-mapping="customer[community]" value="Heritage Pointe (Omaha, Neb.)" required/>Heritage Pointe (Omaha, Neb.)<br>
+      <input type="checkbox" class="community group-required" name="checkbox-group[]" data-mapping="customer[community]" value="Heritage Ridge (Bellevue, Neb.)" required/>Heritage Ridge (Bellevue, Neb.)<br>
+      <input type="checkbox" class="community group-required" name="checkbox-group[]" data-mapping="customer[community]" value="Orchard Pointe at Surprise (Surprise, Ariz.)" required/>Orchard Pointe at Surprise (Surprise, Ariz.)<br>
+      <input type="checkbox" class="community group-required" name="checkbox-group[]" data-mapping="customer[community]" value="Orchard Pointe at Arrowhead (Glendale, Ariz.)" required/>Orchard Pointe at Arrowhead (Glendale, Ariz.)<br>
+      <input type="checkbox" class="community group-required" name="checkbox-group[]" data-mapping="customer[community]" value="The Heritage at College View (Hastings, Neb.)" required/>The Heritage at College View (Hastings, Neb.)<br>
+      <input type="checkbox" class="community group-required" name="checkbox-group[]" data-mapping="customer[community]" value="The Heritage at Fox Run (Council Bluffs, Iowa)" required/>The Heritage at Fox Run (Council Bluffs, Iowa)<br>
+      <input type="checkbox" class="community group-required" name="checkbox-group[]" data-mapping="customer[community]" value="The Heritage at Legacy (Omaha, Neb.)" required/>The Heritage at Legacy (Omaha, Neb.)<br>
+      <input type="checkbox" class="community group-required" name="checkbox-group[]" data-mapping="customer[community]" value="The Heritage at Meridian Gardens (Columbus, Neb.)" required/>The Heritage at Meridian Gardens (Columbus, Neb.)<br>
+      <input type="checkbox" class="community group-required" name="checkbox-group[]" data-mapping="customer[community]" value="The Heritage at Northern Hills (Sioux City, Iowa)" required/>The Heritage at Northern Hills (Sioux City, Iowa)<br>
+      <input type="checkbox" class="community group-required" name="checkbox-group[]" data-mapping="customer[community]" value="The Heritage at Sagewood (Grand Island, Neb.)" required/>The Heritage at Sagewood (Grand Island, Neb.)<br>
+      <input type="checkbox" class="community group-required" name="checkbox-group[]" data-mapping="customer[community]" value="The Heritage at Shalimar Gardens (Fremont, Neb.)" required/>The Heritage at Shalimar Gardens (Fremont, Neb.)<br>
+      <input type="checkbox" class="community group-required" name="checkbox-group[]" data-mapping="customer[community]" value="The Heritage at Sterling Ridge (Omaha, Neb.)" required/>The Heritage at Sterling Ridge (Omaha, Neb.)<br>
     </label>
 
   </div>
 
-  <div class="form-field checkbox-group group-required">
-    <label for="hours">Hours</label>
+  <div class="form-group options">
+    <label class="control-label" for="optiontext">Hours (select one)*</label>
 
-    <input type="checkbox" class="hours group-required" name="checkbox-group" data-mapping="customer[hours]" value="Full Time">Full Time<br />
-    <input type="checkbox" class="hours group-required" name="checkbox-group" data-mapping="customer[hours]" value="Part Time">Part Time<br />
-    <input type="checkbox" class="hours group-required" name="checkbox-group" data-mapping="customer[hours]" value="Temporary">Temporary<br />
+    <input type="checkbox" class="hours group-required" name="checkbox-group[]" data-mapping="customer[hours]" value="Full Time" required/>Full Time<br />
+    <input type="checkbox" class="hours group-required" name="checkbox-group[]" data-mapping="customer[hours]" value="Part Time" required/>Part Time<br />
+    <input type="checkbox" class="hours group-required" name="checkbox-group[]" data-mapping="customer[hours]" value="Temporary" required/>Temporary<br />
 
   </div>
 
-  <div class="form-field checkbox-group group-required">
-    <label for="shift-preference">Shift Preference</label>
+  <div class="form-group options">
+    <label class="control-label" for="optiontext">Shift Preference (select one)*</label>
 
-    <input type="checkbox" class="shift-preference" name="shift-preference" data-mapping="customer[shift-preference]" value="Days">Days<br />
-    <input type="checkbox" class="shift-preference" name="shift-preference" data-mapping="customer[shift-preference]" value="Evenings">Evenings<br />
-    <input type="checkbox" class="shift-preference" name="shift-preference" data-mapping="customer[shift-preference]" value="Nights">Nights<br />
-    <input type="checkbox" class="shift-preference" name="shift-preference" data-mapping="customer[shift-preference]" value="Any Shift">Any Shift<br />
+    <input type="checkbox" class="shift-preference group-required" name="shift-preference" data-mapping="customer[shift-preference]" value="Days" required/>Days<br />
+    <input type="checkbox" class="shift-preference group-required" name="shift-preference" data-mapping="customer[shift-preference]" value="Evenings" required/>Evenings<br />
+    <input type="checkbox" class="shift-preference group-required" name="shift-preference" data-mapping="customer[shift-preference]" value="Nights" required/>Nights<br />
+    <input type="checkbox" class="shift-preference" name="shift-preference" data-mapping="customer[shift-preference]" value="Any Shift" required/>Any Shift<br />
 
   </div>
 
@@ -205,9 +206,9 @@
   </div>
 
   <div class="form-field">
-    <label for="have-you-applied">Have you ever applied for a position at Heritage Communities before?</label>
-    <input type="radio" id="have-you-appliedy" class="have-you-applied required" name="have-you-applied" data-mapping="customer[have-you-applied]">Yes<br />
-    <input type="radio" id="have-you-appliedn" class="have-you-applied required" name="have-you-applied" data-mapping="customer[have-you-applied]">No<br />
+    <label for="have-you-applied" class="required">Have you ever applied for a position at Heritage Communities before?</label>
+    <input type="radio" id="have-you-appliedy" class="have-you-applied" name="have-you-applied" data-mapping="customer[have-you-applied]" required>Yes<br />
+    <input type="radio" id="have-you-appliedn" class="have-you-applied" name="have-you-applied" data-mapping="customer[have-you-applied]" required>No<br />
     </div>
   </div>
 
@@ -225,26 +226,20 @@
 
   <div class="form-field">
     <label for="years">Are you 18 years of age?</label>
-    <input type="radio" id="years" class="years" name="years" data-mapping="customer[years]">Yes<br />
-    <div class="form-field">
-      <input type="radio" id="years" class="years" name="years" data-mapping="customer[years]">No<br />
-    </div>
+    <input type="radio" id="yearsy" class="years" name="years" data-mapping="customer[years]" required/>Yes<br />
+    <input type="radio" id="yearsn" class="years" name="years" data-mapping="customer[years]" required/>No<br />
   </div>
 
   <div class="form-field">
     <label for="legal">Are you legally authorized to work in the U.S.?</label>
-    <input type="radio" id="legal" class="legal" name="legal" data-mapping="customer[legal]">Yes<br />
-    <div class="form-field">
-      <input type="radio" id="legal" class="legal" name="legal" data-mapping="customer[legal]">No<br />
-    </div>
+    <input type="radio" id="legal" class="legal" name="legal" data-mapping="customer[legal]" required>Yes<br />
+    <input type="radio" id="legal" class="legal" name="legal" data-mapping="customer[legal]" required>No<br />
   </div>
 
   <div class="form-field">
     <label for="military">Have you served in the military?</label>
-    <input type="radio" id="military" class="military" name="military" data-mapping="customer[military]">Yes<br />
-    <div class="form-field">
-      <input type="radio" id="military" class="military" name="military" data-mapping="customer[military]">No<br />
-    </div>
+    <input type="radio" id="military" class="military" name="military" data-mapping="customer[military]" required>Yes<br />
+    <input type="radio" id="military" class="military" name="military" data-mapping="customer[military]" required>No<br />
   </div>
 
   <br><hr><br>
@@ -353,7 +348,7 @@
   <h4>Education Section</h4><br>
 
   <div class="form-field">
-    <input type="text" id="highest-grade" class="highest-grade" name="highest-grade" data-mapping="education[highest-grade]" maxlength="50" placeholder="Highest Grade Completed">
+    <input type="text" id="highest-grade" class="highest-grade" name="highest-grade" data-mapping="education[highest-grade]" maxlength="50" placeholder="Highest Grade Completed" required/>
   </div>
 
   <div class="form-field">
@@ -390,8 +385,8 @@
 
   <div class="form-field">
     <label for="convicted">Have you been convicted of a felony that has not been expunged, sealed, pardoned, annulled, statutorily eradicated or dismissed upon condition of probation in this state or any other state?</label>
-    <input type="radio" id="convictedy" class="convicted" name="convicted" data-mapping="customer[convicted]">Yes<br />
-    <input type="radio" id="convictedn" class="convicted" name="convicted" data-mapping="customer[convicted]">No<br />
+    <input type="radio" id="convictedy" class="convicted" name="convicted" data-mapping="customer[convicted]" required/>Yes<br />
+    <input type="radio" id="convictedn" class="convicted" name="convicted" data-mapping="customer[convicted]" required/>No<br />
   </div>
 
   <div class="note">
