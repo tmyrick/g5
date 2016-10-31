@@ -1,0 +1,115 @@
+<body><table border="1" class="jiveBorder" height="938">
+<tbody>
+<tr><th style="text-align: left; background-color: #f2f2f2; color: #505050; padding: 6px;" valign="middle"><span style="font-family: helvetica;"><strong><h1>DNS Configuration</h1></strong></span></th><th style="text-align: left; background-color: #f2f2f2; color: #505050; padding: 6px;" valign="middle"></th></tr>
+<tr>
+<td style="padding: 6px;">
+<p>Website<span style="font-family: helvetica;"> is down - here are the troubleshooting steps to bringing it back to life!</span></p>
+<p><span style="font-family: helvetica;">First, let's eliminate the possibility that the site is down due to a misconfiguration on the client's end.</span></p>
+<p></p>
+<p><span style="font-family: helvetica;">Open up a terminal and run the following command:</span></p>
+<p><span style="font-family: helvetica;"><strong>Windows</strong>: <span style="border: 1px solid #cfcfcf; border-radius: 4px; padding: 3px; color: #e23d39; background: #efefef;">nslookup www.domainname.com</span></span></p>
+<p><span style="font-family: helvetica;"><strong>Mac</strong>: <span style="border: 1px solid #cfcfcf; border-radius: 4px; padding: 3px; color: #e23d39; background: #efefef;">dig www.domainname.com</span></span></p>
+</td>
+<td style="padding: 6px;"></td>
+</tr>
+<tr>
+<td colspan="1" style="padding: 6px;">
+<h2><span style="font-family: helvetica;">Core</span></h2>
+</td>
+<td colspan="1" style="padding: 6px;"></td>
+</tr>
+<tr>
+<td style="padding: 6px;"><ol>
+<li><span style="font-family: helvetica;"><strong>A record:</strong> The client's A record (@ host) should be pointing at the Core server IP address - <strong>72.46.233.151</strong></span></li>
+<li><span style="font-family: helvetica;"><strong>WWW CNAME:</strong> The client's WWW CNAME record should be pointing at "<strong>@</strong>"; the A record, which should be pointing at Core's IP</span></li>
+</ol></td>
+<td style="padding: 6px; width: 60%;">
+<p><span style="font-family: helvetica;"><img style="width: 48%; padding:3px;" alt="dig.png" class="image-1 jive-image" src="https://g5.jiveon.com/servlet/JiveServlet/downloadImage/102-9086-2-166846/dig.png" width="486" __jive_id="166846" /><img style="width: 48%; padding:3px;" alt="nslookup.png" class="image-2 jive-image" src="https://g5.jiveon.com/servlet/JiveServlet/downloadImage/102-9086-2-166847/nslookup.png" __jive_id="166847" /></span></p>
+</td>
+</tr>
+<tr>
+<td colspan="1" style="padding: 6px;">
+<h2>Cloud</h2>
+</td>
+<td colspan="1" style="padding: 6px;"></td>
+</tr>
+<tr>
+<td style="padding: 6px;"><ol>
+<li><strong>A record:</strong> This one is tricky - <strong>all we care about here is that domainname.com is forwarding to www.domainname.com</strong><span>. You can test this by navigating to </span><strong><a class="jive-link-external-small unlinked" rel="nofollow" target="_blank">http://domainname.com</a></strong>​<span> (with the http://) bar and see if it automatically redirects you to </span><strong><a class="jive-link-external-small unlinked" rel="nofollow" target="_blank">http://www.domainname.com</a></strong><span><br /></span></li>
+<ol>
+<li><span style="color: #e23d39;">IF the naked domain (without the www.) isn't forwarding to www.domainname.com</span>, <strong>do the following</strong></li>
+<ol>
+<li>Determine what registrar the domain is hosted on. To do this, navigate to your terminal and run the following command: <span style="border: 1px solid #cfcfcf; border-radius: 4px; padding: 3px; color: #e23d39; background: #efefef;">whois domainname.com</span></li>
+<li>This should return quite a bit of info about the domain, including which registrar it's using. Knowing which registrar the domain is on is going to help a lot with the following step.</li>
+<li>A domain forward needs to be placed on the naked domain (domainname.com without the "www.") that forwards to www.domainname.com. This is a setting that is available in <em>most</em> registrars. It's typically pretty easy to find an instruction guide to setting up a domain forward for the registrar at hand.</li>
+</ol></ol>
+<li>WWW CNAME: Should point to the client's vanity domain - domainname.g5dns.com. (e.g. If they owned www.google.com, they would need to enter google.g5dns.com)</li>
+</ol></td>
+<td style="padding: 6px;">
+<p><span style="font-family: helvetica;"><img style="width: 48%; padding:3px;" alt="who_is.png" class="image-7 jive-image" src="https://g5.jiveon.com/servlet/JiveServlet/downloadImage/166864/who_is.png" width="443" /><img style="width: 48%; padding:3px;" alt="digcloud.png" class="image-4 jive-image" src="https://g5.jiveon.com/servlet/JiveServlet/downloadImage/102-9086-2-166851/digcloud.png" __jive_id="166851" /></span></p>
+</td>
+</tr>
+<tr>
+<td style="padding: 6px;">
+<h2>Core Configuration</h2>
+</td>
+<td style="padding: 6px;"></td>
+</tr>
+<tr>
+<td style="padding: 6px;"><ol>
+<li>First, take a look at the location's configuration in the Client Center</li>
+<ol>
+<li><strong>The `Status` must be set to Active</strong></li>
+<li><strong>The `Website Display` box must be checked</strong></li>
+<li>While we're here, let's make note of the store id that displays in between the tabs and the Store Name field, in this case, <strong>3772</strong></li>
+</ol>
+<li>Next, let's take a look at the `Domains` tab at the Client level</li>
+<ol>
+<li>Find the domain in question inside of the `Domains` tab and check the following</li>
+<ol>
+<li>Is the domain correct? (shouldn't have the www.)</li>
+<li>Is the store ID correct? (same id we took note of above)</li>
+</ol></ol></ol></td>
+<td style="padding: 6px;">
+<p><img style="width: 48%; padding:3px;" alt="cc-config1.png" class="image-5 jive-image" src="https://g5.jiveon.com/servlet/JiveServlet/downloadImage/102-9086-2-166857/cc-config1.png" __jive_id="166857" /><img style="width: 48%; padding:3px;" alt="cc-config2.png" class="image-6 jive-image" src="https://g5.jiveon.com/servlet/JiveServlet/downloadImage/102-9086-2-166858/cc-config2.png" __jive_id="166858" /></p>
+</td>
+</tr>
+<tr>
+<td style="padding: 6px;">
+<h2>Cloud Configuration</h2>
+</td>
+<td style="padding: 6px;"></td>
+</tr>
+<tr>
+<td style="padding: 6px;">
+<ul>
+<li><strong>Heroku or AWS?</strong></li>
+<ul>
+<li>To identify whether a site is hosted on Heroku or AWS, simple hover over the "View" link in the CMS for any location.</li>
+<ul>
+<li>If the URL structure ends with herokuapp.com - it's on Heroku</li>
+<li>If the URL structure ends with g5static.com - it's on AWS</li>
+</ul>
+</ul>
+</ul>
+<p><strong>G5 Hub: </strong></p>
+<p><strong>DNSimple:</strong></p>
+<p></p>
+</td>
+<td style="padding: 6px;"></td>
+</tr>
+<tr>
+<td style="padding: 6px;"></td>
+<td style="padding: 6px;"></td>
+</tr>
+<tr>
+<td style="padding: 6px;"></td>
+<td style="padding: 6px;"></td>
+</tr>
+<tr>
+<td style="padding: 6px;"></td>
+<td style="padding: 6px;"></td>
+</tr>
+</tbody>
+</table>
+<p></p></body>

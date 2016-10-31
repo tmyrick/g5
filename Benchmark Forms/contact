@@ -1,0 +1,69 @@
+<div class="p-author h-card">
+
+  <div class="form-field">
+    <input type="text" id="p-name" class="p-name required" name="p-name" data-mapping="customer[name]" placeholder="Name*" required>
+  </div>
+
+  <div class="form-field">
+    <fieldset>
+      <legend class="required">Are you a current customer?</legend>
+      <label><input type="radio" class="p-g5-resident" name="p-g5-resident" data-mapping="contact[current_resident]" value="Yes"> Yes</label>
+      <label><input type="radio" class="p-g5-resident" name="p-g5-resident" data-mapping="contact[current_resident]" value="No" checked> No</label>
+    </fieldset>
+  </div>
+
+  <div class="form-field">
+    <label for="p-g5-resident-2">If not, how did you hear about us?</label>
+    <input type="text" id="p-g5-resident-2" class="p-g5-resident-2" data-mapping="contact[hear_about_us]" name="p-g5-resident-2">
+  </div>
+
+  <div class="form-field">
+    <input type="tel" id="p-tel" class="p-tel" name="p-tel" data-mapping="customer[phone]" placeholder="Phone Number">
+  </div>
+
+  <div class="form-field">
+    <input type="email" id="u-email" class="u-email required" name="u-email" data-mapping="customer[email]" placeholder="Email* " required>
+  </div>
+</div>
+
+<div class="form-field">
+  <label for="e-content">Message (250 character limit)</label>
+  <textarea id="e-content" class="e-content" name="e-content" data-mapping="contact[message]" maxlength="250"></textarea>
+</div>
+
+<label for="hear">Please share how you heard about us:</label>
+
+<div class="form-field">
+    <select id="someone" class="someone" name="someone" data-mapping="information[how_you_heard_about_us]">
+    <option value="" selected>Someone I trust recommended you</option>
+    <option>Social worker, Nurse, Case Manager, Physician</option>
+    <option>Legal or Real Estate Professional</option>
+    <option>Local Community Business, Senior Center, First Responder</option>
+    <option>Friend or Colleague</option>
+    </select>
+</div>
+
+<div class="form-field">
+    <select id="online" class="online" name="online" data-mapping="information[how_you_heard_about_us]">
+    <option value="" selected>Online search for Assisted Living in my area</option>
+    <option>Benchmark was in the top search results</option>
+    <option>I saw Benchmark on Facebook</option>
+    <option>Another referral site recommended Benchmark</option>
+    <option>I noticed an advertisement or sign</option>
+    </select>
+</div>
+
+<div class="form-field">
+    <select id="ad" class="ad" name="ad" data-mapping="information[how_you_heard_about_us]">
+    <option value="" selected>I saw a local print or magazine ad</option>
+    <option>Benchmark was featured in an article I read</option>
+    <option>I saw a print ad in a medical resource guide</option>
+    <option>I heard a radio advertisement</option>
+    <option>I drove by your community</option>
+    <option>I attended a conference or expo</option>
+    </select>
+</div>
+
+
+<input type="submit" value="Send"/>
+<span class="form-instruction">* Required Field</span>

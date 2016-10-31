@@ -1,0 +1,167 @@
+<div class="p-author h-card">
+  <div class="form-field">
+    <input type="text" id="p-name" class="p-name required" name="p-name" data-mapping="customer[name]" placeholder="First Name*" required>
+  </div>
+  <div class="form-field">
+    <input type="text" id="p-name" class="p-name required" name="p-name" data-mapping="customer[name]" placeholder="Last Name*" required>
+  </div>
+  <div class="form-field">
+    <fieldset>
+      <legend class="required">Are you a Current Customer?</legend>
+      <label><input type="radio" class="p-g5-resident" name="p-g5-resident" data-mapping="contact[current_resident]" value="Yes"> Yes</label>
+      <label><input type="radio" class="p-g5-resident" name="p-g5-resident" data-mapping="contact[current_resident]" value="No" checked> No</label>
+    </fieldset>
+  </div>
+  <div class="form-field">
+    <input type="tel" id="p-tel" class="p-tel" name="p-tel" data-mapping="customer[phone]" placeholder="Phone Number*">
+  </div>
+  <div class="form-field">
+    <input type="email" id="u-email" class="u-email required" name="u-email" data-mapping="customer[email]" placeholder="Email* " required>
+  </div>
+  <div class="form-field">
+    <legend class="required">How can we help you?</legend>
+    <input type="text" id="p-g5-resident-2" class="p-g5-resident-2" data-mapping="contact[hear_about_us]" name="p-g5-resident-2">
+  </div>
+</div>
+<div class="form-field">
+  <label for="e-content"><legend class="required">Subject</legend></label>
+  <textarea id="e-content" class="e-content" name="e-content" data-mapping="contact[message]" maxlength="250"></textarea>
+</div>
+<input type="submit" value="Send"/>
+<span class="form-instruction">* Required Field</span>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Corp Contact -->
+
+<div class="p-author h-card">
+  <div class="form-field">
+    <input type="text" id="p-name" class="p-name required" name="p-name" data-mapping="customer[name]" placeholder="First Name*" required>
+  </div>
+
+  <div class="form-field">
+    <input type="text" id="p-name" class="p-name required" name="p-name" data-mapping="customer[name]" placeholder="Last Name*" required>
+  </div>
+
+  <div class="form-field">
+    <input type="tel" id="p-tel" class="p-tel" name="p-tel" data-mapping="customer[phone]" placeholder="Phone Number*">
+  </div>
+
+  <div class="form-field">
+    <input type="email" id="u-email" class="u-email required" name="u-email" data-mapping="customer[email]" placeholder="Email*" required>
+  </div>
+  
+  <div class="form-field">
+    <legend class="required">How can we help you?</legend>
+    <input type="text" id="p-g5-resident-2" class="p-g5-resident-2" data-mapping="contact[hear_about_us]" name="p-g5-resident-2">
+  </div>
+</div>
+
+<div class="form-field">
+  <label for="e-content"><legend class="required">Subject</legend></label>
+  <textarea id="e-content" class="e-content" name="e-content" data-mapping="contact[message]" maxlength="250"></textarea>
+</div>
+
+<input type="submit" value="Send"/>
+<span class="form-instruction">* Required Field</span>
+
+
+
+
+
+
+
+
+
+
+<!-- pre-opening -->
+
+
+
+
+<div class="p-author h-card">
+  <div class="form-field">
+    <input type="text" id="p-name" class="p-name required" name="p-name" data-mapping="customer[name]" placeholder="First Name*" required>
+  </div>
+  <div class="form-field">
+    <input type="text" id="p-name" class="p-name required" name="p-name" data-mapping="customer[name]" placeholder="Last Name*" required>
+  </div>
+  <div class="form-field">
+    <input type="email" id="u-email" class="u-email required" name="u-email" data-mapping="customer[email]" placeholder="Email*" required>
+  </div>
+  <div class="form-field">
+    <input type="tel" id="p-tel" class="p-tel" name="p-tel" data-mapping="customer[phone]" placeholder="Phone Number*">
+  </div>
+  <div class="form-field">
+    <legend class="required">How can we help you?</legend>
+    <input type="text" id="p-g5-resident-2" class="p-g5-resident-2" data-mapping="contact[hear_about_us]" name="p-g5-resident-2">
+  </div>
+</div>
+<input type="submit" value="Send"/>
+<span class="form-instruction">* Required Field</span>
+
+
+
+
+
+<section class="clearfix">
+  <div class="knowledge-base">
+    <h1>{{help_center.name}}</h1>
+    <ul class="category-list">
+      {{#each categories}}
+        <li id="category_id_{{id}}"><a href="{{url}}">{{name}}</a></li>
+      {{/each}}
+
+      {{pagination}}
+    </ul>
+    </div>
+    {{#if promoted_articles}}
+      <section class="promoted-articles">
+        <h3>{{t 'promoted_articles'}}</h3>
+        <ul>
+          {{#each promoted_articles}}
+            <li>
+              <a href="{{url}}">{{title}}</a>
+            </li>
+          {{/each}}
+        </ul>
+      </section>
+    {{/if}}
+
+  <div class="community">
+    {{#if help_center.community_enabled}}
+      <h4>
+        {{t 'community'}}
+        {{#link 'community'}}
+          {{t 'browse'}}
+        {{/link}}
+      </h4>
+    {{/if}}
+    {{recent_activity scope='community'}}
+  </div>
+</section>
+
+
+<table style="width: 100%;" border="0" cellspacing="5" cellpadding="5">
+<tbody>
+<tr>
+<td><script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><div class="wistia_embed wistia_async_y9gptn5e2q videoFoam=true" style="height:100%;width:100%">&nbsp;</div></div></div>
+</td>
+<td><script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><div class="wistia_embed wistia_async_0izl9gsyfy videoFoam=true" style="height:100%;width:100%">&nbsp;</div></div></div></td>
+</tr>
+<tr>
+<td><script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><div class="wistia_embed wistia_async_6l8lroe0te videoFoam=true" style="height:100%;width:100%">&nbsp;</div></div></div>
+</td>
+<td><script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><div class="wistia_embed wistia_async_zmy05zcicq videoFoam=true" style="height:100%;width:100%">&nbsp;</div></div></div></td>
+</tr>
+</tbody>
+</table>
+

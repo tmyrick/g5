@@ -1,0 +1,145 @@
+if ($('div.resultName:contains("Hawthorne Animal Hospital")').length > 0) {
+    $("div.resultName:contains("Hawthorne Animal Hospital")").css({"box-shadow": ("shadow")};
+  };
+)
+
+var cloak = ($('div.resultName:contains("Hawthorne Animal Hospital")').length > 0);
+cloak.css("display:", "none");
+
+
+
+
+
+var color = $('.box').css('background-color');
+if (color == 'rgb(0, 0, 255)' || color == 'blue') // =='blue' <- IE hack
+    alert("it's blue!\nColor detected: " + color);
+
+
+
+
+
+div.ember-view
+
+$('div > div.resultContactInfo > div.resultAddress > div.resultName').filter(function() {
+   return (this.textContent || this.innerText) === 'Hawthorne Animal Hospital';
+}).css("display", "none");
+
+
+
+div > div.resultContactInfo > div.resultAddress > div.resultName
+
+
+
+
+$(document).ready(function () {
+  $('div > div.resultContactInfo > div.resultAddress > div.resultName').filter(':contains("Hawthorne Animal Hospital")')
+  .css('background-color', 'green')
+  .closest("div.ember-view").css('display', 'none');
+});
+
+
+$('div.resultName').each(function() {
+    var text = $(this).text();
+    $(this).text(text.replace('Displaying 2 results', 'Displaying 1 result'));
+})
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js">
+<script type="text/javascript">
+window.onload = function () {
+  $('div > div.resultContactInfo > div.resultAddress > div.resultName').filter(':contains("Hawthorne Animal Hospital")')
+  .css('background-color', 'green')
+  .closest("div.ember-view").css('display', 'none');
+};
+
+$('div.resultName').each(function() {
+    var text = $(this).text();
+    $(this).text(text.replace('Displaying 2 results', 'Displaying 1 result'));
+});
+
+
+
+
+
+
+
+
+$(document).ready(function () {
+  $('div > div.resultContactInfo > div.resultAddress > div.resultName').filter(':contains("Hawthorne Animal Hospital")')
+  .css('background-color', 'green');
+  .closest("div.ember-view").css('display', 'none');
+
+  $('div.resultName').each(function() {
+  var text = $(this).text();
+    $(this).text(text.replace('Displaying 2 results', 'Displaying 1 result'));
+})
+
+----------------------------------
+
+
+<script type="text/javascript">
+$("button.search").click(function () {
+  $('div > div.resultContactInfo > div.resultAddress > div.resultName').filter(':contains("Hawthorne Animal Hospital")')
+  .css('background-color', 'green')
+  .closest("div.ember-view").css('display', 'none');
+
+  $('div.resultName').each(function() {
+    var text = $(this).text();
+    $(this).text(text.replace('Displaying 2 results', 'Displaying 1 result'));
+  })})
+
+--------------------------------------
+
+
+$('.log').ajaxComplete(function() {
+  $('div > div.resultContactInfo > div.resultAddress > div.resultName').filter(':contains("Hawthorne Animal Hospital")')
+  .css('background-color', 'green')
+  .closest("div.ember-view").css('display', 'none');
+
+  $('div.resultName').each(function() {
+    var text = $(this).text();
+    $(this).text(text.replace('Displaying 2 results', 'Displaying 1 result'));
+  })})
+
+
+
+-----------------------------------------
+
+
+window.setTimeout("Function_to_execute()", 5000);{
+  $('div > div.resultContactInfo > div.resultAddress > div.resultName').filter(':contains("Hawthorne Animal Hospital")')
+  .css('background-color', 'green')
+  .closest("div.ember-view").css('display', 'none');
+
+  $('div.resultName').each(function() {
+    var text = $(this).text();
+    $(this).text(text.replace('Displaying 2 results', 'Displaying 1 result'));
+  })}
+
+
+
+
+
+
+
+
+
+
+---------------------------------
+
+
+
+function timeoutdemo(){
+  window.setTimeout('removeHawthorne()', 3000);
+}
+
+function removeHawthorne(){
+  $('div > div.resultContactInfo > div.resultAddress > div.resultName').filter(':contains("Hawthorne Animal Hospital")')
+    .css('background-color', 'green')
+    .closest("div.ember-view").css('display', 'none');
+
+  $('div.resultName').each(function() {
+    var text = $(this).text();
+    $(this).text(text.replace('Displaying 2 results', 'Displaying 1 result'));
+  })}
+

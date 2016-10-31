@@ -1,0 +1,14 @@
+div.video.fluid-video.widget.h-media {
+    margin: 10px auto 10px auto;
+}
+
+@media screen and (max-width: 56.8125em) and (min-width: 40.0625em){
+    .web-page-template .action-calls {
+        margin: auto;
+        padding: none;
+    }
+
+    .web-page-template .action-calls li {
+        width: 100% !important;
+    }
+}

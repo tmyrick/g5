@@ -1,0 +1,293 @@
+heroku run rake widget:bind_nested -a [APPNAME]
+
+<!-- TURN DOWN FOR WHAT? -->
+websites = Website.all.map(&:urn)
+websites.each {|a| puts a } ; nil
+
+heroku dyno:type free -a
+
+heroku maintenance:on -a
+heroku ps:scale web=0 -a
+
+heroku run console -a 
+
+websites = Website.all.map(&:urn) {|a| [truncate(websites, :length => 10, :omission => ''), webdsites} 
+
+SIDEKIQ_CONCURRENCY 3
+WEB_DYNO_SIZE 2048
+
+<!--ADD SSL CERT-->
+
+heroku join -a g5-hub
+
+heroku addons:create ssl:endpoint -a g5-clw-6mfp7ht-tiger-self-stor
+
+heroku certs:add www_tigerselfstorage_com.pem www_tigerselfstorage_com_server.key  -a g5-clw-6mfp7ht-tiger-self-stor
+
+
+<!--CMS Vanity-->
+
+heroku certs:add g5dxm_ssl-bundle.crt g5dxm_server.key -a g5-cms-i7m5g85s-top-shelf-stor
+
+
+<!--REMOVE SSL CERT-->
+
+heroku certs:remove -a g5-clw-6ikxool-storquest-self
+
+heroku addons:destroy ssl:endpoint -a g5-clw-6ikxool-storquest-self
+
+
+<!--ADD/UPGRADE DATABASE TO CMS-->
+
+g5-cls-iqa3e76t-brightwater-se
+
+heroku addons:add heroku-postgresql:hobby-basic -a g5-cls-iqa3e76t-brightwater-se
+
+heroku pg:wait -a  g5-cls-iqa3e76t-brightwater-se
+
+heroku maintenance:on -a g5-cls-iqa3e76t-brightwater-se
+
+heroku ps:scale worker=0 -a g5-cls-iqa3e76t-brightwater-se
+
+heroku pg:copy DATABASE_URL HEROKU_POSTGRESQL_ROSE_URL -a g5-cls-iqa3e76t-brightwater-se
+
+heroku pg:promote HEROKU_POSTGRESQL_ROSE -a g5-cls-iqa3e76t-brightwater-se
+
+heroku ps:scale worker=1 -a g5-cls-iqa3e76t-brightwater-se
+
+heroku maintenance:off -a g5-cls-iqa3e76t-brightwater-se
+
+heroku pg:backups schedule --at '02:00 America/Los_Angeles' HEROKU_POSTGRESQL_ROSE --app g5-cls-iqa3e76t-brightwater-se
+
+
+<!-- MANUAL SITELINK SYNC -->
+
+cd /data/site-link-job/current && G5_JOB_ENV=production INTEGRATION_ID=190 bundle exec rake site_link:sync_inventory_for_integration
+
+tail -f /data/site-link-job/current/log/production.log
+
+**Refer to evernote**^^
+
+
+g5-cl-5351gp2m2-the-springs-at-anna-maria
+
+<!--delete a location from the hub-->
+
+heroku run console -a g5-hub
+l = Location.where(urn: "g5-cl-54ooz0lge-another-test")
+l.first.delete
+
+<!-- delete a website from a cms -->
+
+heroku run console -a g5-cms-1tick0r7-vision-health
+w = Website.where(urn: "g5-clw-6ncpj7u-another-test")
+w.first.delete
+
+<!-- seed website from location -->
+
+heroku run rake website:seed[g5-cl-54ooz0lge-another-test] -a g5-cms-igs7hgsf-g5-concierge-s
+
+<!-- NGINX -->
+
+bundle exec cap production nginx:configtest
+
+bundle exec cap production nginx:reload
+
+<!-- Resque workers -->
+runs the converter job
+heroku run rake widget:convert_nav
+
+
+<!-- SIDEKIQ -->
+The config vars needed for a CMS on Sidekiq
+
+REDIS_PROVIDER=REDISTOGO_URL
+HEROKU_APP=[insert app urn here]
+HEROKU_ACCESS_TOKEN = 8ed252db-2ae5-424a-b207-a7e94883257e
+8ed252db-2ae5-424a-b207-a7e94883257e is also identical to existing config var named “HEROKU_API_KEY"
+
+
+bundle exec cap demo g5:deploy_template_paths domains=missionrock-location revision=bathrooms
+
+<!-- Adding multiple lines of redirects to a site_redirects config var in the cms -->
+heroku config:set SITE_REDIRECTS="$(cat radiant_redirects.txt)" -a g5-cms-i8m5pjk5-radiant-senior
+
+
+Add /api/v1/locations to the end of a cms to see json view of data
+
+
+NEW CMS forms aren't loading
+heroku run rake g5_forms_updatable:load_for_client -a [CLS_APP_URN]
+
+
+Location.count
+Website.count
+websites = Website.all.map(&:urn)
+locations = Location.all.map{|loc|puts loc.name}
+locations = Location.all.map{|loc| loc.website.urn}
+websites-locations
+toasty = Website.where(urn:"g5-clw-1tsi1ddv-mission-rock-single")
+toasty.first.delete
+
+
+l = Location.where(urn:"g5-cl-565xf39bg-metro-self-storage-mableton")
+
+ssh util /data/g5clients/current/gscapts.com/
+
+websites = Website.all.map(&:urn)
+websites.each {|a| puts a } ; nil
+       
+
+DELETING A ROW FROM THE PROVISIONER
+repo = Repo.where(name: "g5-clw-6l522ni-marq-at-rino").first
+repo.domains.map {|d| DomainProvisioner.unlink(repo.name, d.name) }
+repo.destroy
+
+d = Location.where(domain:"www.cedarbrookseniorliving.com")
+toasty = d.locations.each.map {|d| puts d.domain} ;nil
+
+
+
+c = Client.where(urn:"g5-c-i7qkhd3l-compass-pointe-healthcare-system")
+toasty = c.locations.each.map {|d| puts d.domain} ;nil
+super_toasty = c.locations.each.map {|loc| puts "#{loc.urn} - #{loc.domain}"} ;nil
+c.locations.where(status:"Live").each.map {|d| puts d.domain} ;nil
+
+Most things live in the `properties` {hash}
+loc=G5Updateable::Location.last
+loc.state_name
+loc.properties[`state_name`] - this will look into the properties hash
+loc.home_page_url
+
+Add `debugger` into JS file - edit gulpfile.js to comment out the uglify line
+
+	****************SEM LANDING PAGE DNS SETUP****************
+http://screencast.com/t/ITvKbdMHty0
+http://screencast.com/t/eAxqAaUDG6e
+
+
+
+CLOUD PRs
+- Update code
+- Update HISTORY.md and config/version.yml
+- PR http://screencast.com/t/rrtpzL5MCp9
+
+
+**Deleting a service from the CC**
+ctn = Service.find(111659)
+ctn.update_attributes(parent_id:111658)
+or
+ctn.delete
+
+**********BACKFILLS**********
+- Lead data
+- GA/user data
+- Cost data should automatically work
+	- Grabbing from a report in core
+
+Data backfill template:
+**Client**: Hercules
+**Core Domain Type:** Multi
+**Cloud Domain Type**: Single
+**Go-Live date on Cloud**: 06132016
+**Client URN:** g5-c-ijotro80-spectrum-retirement-communities-client
+**Client CLS**: g5-cls-ijotro80-spectrum-retir
+**Date range for backfill:** 06132014 - 06132016
+
+
+bundle exec cap demo g5:deploy_template_paths domains=skyline revision=corp_bg_color
+
+
+*** CLOUD DEPLOY PROCESS ***
+Setting up the g5-hub locally
+
+checkout readme: https://github.com/G5/g5-hub
+
+first clone hub
+
+edit un and pw in database.yml (not sure this is necessary)
+
+create app in dev-auth and enter creds into .env
+
+fire up local host server
+
+run heroku pg:pull DATABASE_URL g5_hub_development --app g5-hub to grab db
+
+after you pull in a new db, make sure sidekiq is running and do rake deploy:update will point files to your local
+
+cloud deploy process
+
+make changes locally
+
+be sure to change config/version.yml to reflect some unique name (version: '2.1.2-aaron-widgets')
+
+create branch, add, commit, push… just like core
+
+create pr
+
+then, look in app wrangler for testing cms that’s available - you can tell by version number/unique name
+
+then create remote
+
+heroku git:remote [APP_NAME] -r [WHAT_YOU_WANT_TO_NAME_IT]
+
+push remote to demo cms
+git push -f [WHAT_YOU_NAMED_IT] your_branch:master
+get qa on it
+
+add pr to cms merge pt story
+
+To deploy master cms to a client app’s cms:
+
+#cd into cms
+
+git pull origin master
+
+git remote add cascadia-senior git@heroku.com:g5-cms-1tesp8nv-cascadia-senio.git
+
+git push cascadia-senior master
+
+#note, when pushing code to heroku manually and not using the Configurator, you need to rake the db after pushing master
+
+heroku run rake db:migrate -a g5-cms-1tesp8nv-cascadia-senio
+
+after qa
+
+#push branch to github and pr. make sure to commit git meta stuff
+
+git push origin your-branch
+
+PR -> Merged to Master
+
+#merge into master
+
+git checkout master
+
+#locally pull master
+
+git pull origin master
+
+git fetch
+
+#push to heroku production master
+
+git push production master
+
+heroku git:remote g5-cms-inhx0yfu-the-danger-zon -r denali-z-index-fix
+
+git push -f denali-z-index-fix denali-divider:master
+
+
+**PULLING SPECIAL IDS FROM CLIENT**
+
+$LOAD_PATH << "~/.rvm/gems/ruby-1.9.3-p484/gems/awesome_print-1.6.1/lib" ; nil
+require 'awesome_print'
+require 'csv'
+
+client = Client.find(1076)
+CSV.open("specials-safkeep.csv", "wb") do |csv|
+  csv << ["id", "client_id", "text"]
+  client.specials.each {|spec| csv << [spec.id, spec.client_id, spec.text]}
+end
+
+

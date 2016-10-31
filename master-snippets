@@ -1,0 +1,469 @@
+heroku run rake widget:bind_nested -a [APPNAME]
+
+
+******* CMS Console *********
+GardenWidget.find_by_name("Footer Info").widgets.count
+
+
+hrr "widget:add[Northbrook Inn,drop-target-footer,contact-info]" -a g5-cms-imzccuqt-koelsch-senior
+hrr "widget:add[Northbrook Inn,drop-target-footer,typekit]" -a g5-cms-imzccuqt-koelsch-senior
+hrr "widget:add[Northbrook Inn,drop-target-footer,footer-info]" -a g5-cms-imzccuqt-koelsch-senior
+
+<!-- TURN DOWN FOR WHAT? -->
+
+heroku dyno:type free -a
+
+heroku maintenance:on -a
+heroku ps:scale web=0 -a
+
+heroku run console -a
+
+websites = Website.all.map(&:urn) {|a| [truncate(websites, :length => 10, :omission => ''), webdsites}
+
+SIDEKIQ_CONCURRENCY 3
+WEB_DYNO_SIZE 2048
+
+<!--ADD SSL CERT-->
+
+heroku join -a g5-hub
+
+heroku addons:create ssl:endpoint -a g5-clw-6mfp7ht-tiger-self-stor
+
+heroku certs:add www_tigerselfstorage_com.pem www_tigerselfstorage_com_server.key  -a g5-clw-6mfp7ht-tiger-self-stor
+
+
+<!--CMS Vanity-->
+
+heroku certs:add g5dxm_ssl-bundle.crt g5dxm_server.key -a g5-cms-i7m5g85s-top-shelf-stor
+
+
+<!--REMOVE SSL CERT-->
+
+heroku certs:remove -a g5-clw-6loisib-treasure-island
+
+heroku addons:destroy ssl:endpoint -a g5-clw-6loisib-treasure-island
+
+
+
+<!--ADD/UPGRADE DATABASE TO CMS-->
+
+heroku pg:info -a g5-cls-inzypb5u-surepoint-self
+
+heroku addons:add heroku-postgresql:hobby-basic -a g5-cls-inzypb5u-surepoint-self
+
+heroku pg:wait -a  g5-cls-inzypb5u-surepoint-self
+
+heroku maintenance:on -a g5-cls-inzypb5u-surepoint-self
+
+heroku ps:scale worker=0 -a g5-cls-inzypb5u-surepoint-self
+
+heroku pg:copy DATABASE_URL HEROKU_POSTGRESQL_BLUE_URL -a g5-cls-inzypb5u-surepoint-self
+
+heroku pg:promote HEROKU_POSTGRESQL_BLUE -a g5-cls-inzypb5u-surepoint-self
+
+heroku ps:scale worker=1 -a g5-cls-inzypb5u-surepoint-self
+
+heroku maintenance:off -a g5-cls-inzypb5u-surepoint-self
+
+heroku pg:backups schedule --at '02:00 America/Los_Angeles' HEROKU_POSTGRESQL_BLUE --app g5-cls-inzypb5u-surepoint-self
+
+
+
+
+<!-- MANUAL SITELINK SYNC -->
+
+cd /data/site-link-job/current && G5_JOB_ENV=production INTEGRATION_ID=190 bundle exec rake site_link:sync_inventory_for_integration
+
+tail -f /data/site-link-job/current/log/production.log
+
+**Refer to evernote**^^
+
+
+g5-cl-5351gp2m2-the-springs-at-anna-maria
+
+<!--delete a location from the hub-->
+
+heroku run console -a g5-hub
+l = Location.where(urn: "g5-cl-54ooz0lge-another-test")
+l.first.delete
+
+<!-- delete a website from a cms -->
+
+heroku run console -a g5-cms-1tick0r7-vision-health
+w = Website.where(urn: "g5-clw-6ncpj7u-another-test")
+w.first.delete
+
+<!-- seed website from location -->
+
+heroku run rake website:seed[g5-cl-54ooz0lge-another-test] -a g5-cms-igs7hgsf-g5-concierge-s
+
+<!-- NGINX -->
+
+bundle exec cap production nginx:configtest
+
+bundle exec cap production nginx:reload
+
+<!-- Resque workers -->
+runs the converter job
+heroku run rake widget:convert_nav
+
+
+<!-- SIDEKIQ -->
+The config vars needed for a CMS on Sidekiq
+
+REDIS_PROVIDER=REDISTOGO_URL
+HEROKU_APP=[insert app urn here]
+HEROKU_ACCESS_TOKEN = 8ed252db-2ae5-424a-b207-a7e94883257e
+8ed252db-2ae5-424a-b207-a7e94883257e is also identical to existing config var named “HEROKU_API_KEY"
+
+
+bundle exec cap demo g5:deploy_template_paths domains=missionrock-location revision=bathrooms
+
+<!-- Adding multiple lines of redirects to a site_redirects config var in the cms -->
+heroku config:set SITE_REDIRECTS="$(cat radiant_redirects.txt)" -a g5-cms-i8m5pjk5-radiant-senior
+
+
+Add /api/v1/locations to the end of a cms to see json view of data
+
+
+# NEW CMS forms aren't loading
+heroku run rake g5_forms_updatable:load_for_client -a [CLS_APP_URN]
+
+* websites = Website.all.map(&:urn)
+* websites.each {|a| puts a } ; nil
+
+Location.count
+Website.count
+websites = Website.all.map(&:urn)
+locations = Location.all.map{|loc|puts loc.name}
+
+websites = Website.all.map(&:urn)
+locations = Location.all.map{|loc| loc.website.urn}
+websites - locations
+
+toasty = Website.where(urn:"g5-clw-1tsi1ddv-mission-rock-single")
+toasty.first.delete
+
+
+l = Location.where(urn:"g5-cl-565xf39bg-metro-self-storage-mableton")
+
+ssh util /data/g5clients/current/gscapts.com/
+
+websites = Website.all.map(&:urn)
+websites.each {|a| puts a } ; nil
+
+
+DELETING A ROW FROM THE PROVISIONER
+repo = Repo.where(name: "g5-clw-6l522ni-marq-at-rino").first
+repo.domains.map {|d| DomainProvisioner.unlink(repo.name, d.name) }
+repo.destroy
+
+d = Location.where(domain:"www.cedarbrookseniorliving.com")
+toasty = d.locations.each.map {|d| puts d.domain} ;nil
+
+
+
+c = Client.where(urn:"g5-c-i7qkhd3l-compass-pointe-healthcare-system")
+toasty = c.locations.each.map {|d| puts d.domain} ;nil
+super_toasty = c.locations.each.map {|loc| puts "#{loc.urn} - #{loc.domain}"} ;nil
+c.locations.where(status:"Live").each.map {|d| puts d.domain} ;nil
+
+Most things live in the `properties` {hash}
+loc=G5Updateable::Location.last
+loc.state_name
+loc.properties[`state_name`] - this will look into the properties hash
+loc.home_page_url
+
+Add `debugger` into JS file - edit gulpfile.js to comment out the uglify line
+
+	****************SEM LANDING PAGE DNS SETUP****************
+http://screencast.com/t/ITvKbdMHty0
+http://screencast.com/t/eAxqAaUDG6e
+
+
+CLOUD PRs
+- Update code
+- Update HISTORY.md and config/version.yml
+- PR http://screencast.com/t/rrtpzL5MCp9
+
+
+**Deleting a service from the CC**
+ctn = Service.find(111659)
+ctn.update_attributes(parent_id:111658)
+or
+ctn.delete
+
+**********BACKFILLS**********
+- Lead data
+- GA/user data
+- Cost data should automatically work
+	- Grabbing from a report in core
+
+Data backfill template:
+**Client**: Hercules
+**Core Domain Type:** Multi
+**Cloud Domain Type**: Single
+**Go-Live date on Cloud**: 06132016
+**Client URN:** g5-c-ijotro80-spectrum-retirement-communities-client
+**Client CLS**: g5-cls-ijotro80-spectrum-retir
+**Date range for backfill:** 06132014 - 06132016
+
+
+bundle exec cap demo g5:deploy_template_paths domains=skyline revision=corp_bg_color
+
+
+*** CLOUD DEPLOY PROCESS ***
+Setting up the g5-hub locally
+
+checkout readme: https://github.com/G5/g5-hub
+
+first clone hub
+
+edit un and pw in database.yml (not sure this is necessary)
+
+create app in dev-auth and enter creds into .env
+
+fire up local host server
+
+run heroku pg:pull DATABASE_URL g5_hub_development --app g5-hub to grab db
+
+after you pull in a new db, make sure sidekiq is running and do rake deploy:update will point files to your local
+
+cloud deploy process
+
+make changes locally
+
+be sure to change config/version.yml to reflect some unique name (version: '2.1.2-aaron-widgets')
+
+create branch, add, commit, push… just like core
+
+create pr
+
+then, look in app wrangler for testing cms that’s available - you can tell by version number/unique name
+
+then create remote
+
+heroku git:remote [APP_NAME] -r [WHAT_YOU_WANT_TO_NAME_IT]
+
+push remote to demo cms
+git push -f babel babel-bump:master
+get qa on it
+
+add pr to cms merge pt story
+
+To deploy master cms to a client app’s cms:
+
+#cd into cms
+
+git pull origin master
+
+git remote add cascadia-senior git@heroku.com:g5-cms-1tesp8nv-cascadia-senio.git
+
+git push cascadia-senior master
+
+#note, when pushing code to heroku manually and not using the Configurator, you need to rake the db after pushing master
+
+heroku run rake db:migrate -a g5-cms-1tesp8nv-cascadia-senio
+
+after qa
+
+#push branch to github and pr. make sure to commit git meta stuff
+
+git push origin your-branch
+
+PR -> Merged to Master
+
+#merge into master
+
+git checkout master
+
+#locally pull master
+
+git pull origin master
+
+git fetch
+
+#push to heroku production master
+
+git push production master
+
+heroku git:remote g5-cms-inhx0yfu-the-danger-zon -r denali-z-index-fix
+
+git push -f denali-z-index-fix denali-divider:master
+
+
+**PULLING SPECIAL IDS FROM CLIENT**
+
+$LOAD_PATH << "~/.rvm/gems/ruby-1.9.3-p484/gems/awesome_print-1.6.1/lib" ; nil
+require 'awesome_print'
+require 'csv'
+
+client = Client.find(1076)
+CSV.open("specials-safkeep.csv", "wb") do |csv|
+  csv << ["id", "client_id", "text"]
+  client.specials.each {|spec| csv << [spec.id, spec.client_id, spec.text]}
+end
+
+** REMOVING UNITS/SPECIALS -- INTEGRATIONS! **
+1. Fastest script to remove the units - use this for live server
+stores = Store.where("status_code <= 30 AND client_id = 1076"); nil
+stores.count
+Benchmark.measure {
+  stores.each do |store|
+    store.units.delete_all
+  end; nil
+}
+
+2. Remove specials - this is easy and quick
+specials = Special.where(client_id:1076)
+specials.delete_all
+
+Run SiteLink Job
+ssh demo
+cd /data/site-link-job/current
+G5_JOB_ENV=demo INTEGRATION_ID=172 bundle exec rake site_link:sync_inventory_for_integration
+Tail log
+tail -f /data/site-link-job/current/log/demo.log
+
+
+
+cd /data/site-link-job/current && G5_JOB_ENV=demo INTEGRATION_ID=127 bundle exec rake site_link:sync_inventory_for_integration
+
+
+Yardi Voyager
+
+7/2 Integration for Peggy
+cd /data/yardi_voyager_job/current &&  INTEGRATION_ID = 173 G5_JOB_ENV = production bundle exec rake yardi_voyager:sync_inventory_for_integration
+Logs: tail -f /data/yardi_voyager_job/current/log/production.log
+
+cd /data/yardi_voyager_job/current &&  G5_JOB_ENV = demo INTEGRATION_ID = 144 bundle exec rake yardi_rent_cafe:sync_for_integration
+Logs: tail -f /data/yardi_voyager_job/current/log/demo.log
+
+INTEGRATION_ID=173 G5_JOB_ENV bundle exec rake yardi_voyager:syncs_inventory_for_integration
+
+
+
+cd /data/yardi_voyager_job/current && INTEGRATION_ID=173 G5_JOB_ENV=production bundle exec rake yardi_voyager:sync_inventory_for_integration
+
+
+*************PPC MSN BING ADCENTER STUFF*************************
+
+ssh util
+cd core/current
+rails console
+a = MsnAccount.order("updated_at desc").each {|a| puts a.name } ; nil
+accounts = MsnAccount.order("updated_at desc").each {|a| puts "(#{a.id}) #{a.updated_at.strftime('%A, %d %b %Y %l:%M %p')} | #{a.name} <client_id: #{a.client_id}> #{a.status}" } ; nil
+
+ssh jobs
+/data/msn/current
+/data/msn/current/log/cron_log
+
+cd /data/msn/current && APP_ENV=production START_DATE=2016-08-31 END_DATE=2016-08-01 bundle exec rake msn:adcenter:download_range
+cd /data/msn/current && APP_ENV=production START_DATE=2016-08-17 END_DATE=2016-08-31 bundle exec rake msn:adcenter:download_range
+
+G5 Lead Tracking Test - 1 [0000]
+
+************************
+
+
+September 2nd: tier_4 + escalated_product tags will get applied to each branch of escalation. tickets that spawn pt stories (by way of comment that contains specific text) will inherit a "pivotal_tracker" tag
+
+All not Working tickets will have a type of "problem"
+
+All CMS tickets will have a type of "task"
+
+Incidents?
+
+Reporting.
+
+1966 PT escalations since October 13th, 2010
+
+514 TX escalated to PT since Jan 1st, 2016
+
+Question is used to indicate that the requester's issue is a question rather than a problem that needs to be solved.
+
+Incident is used for occurrences of a problem that affect more than one person. For example, if the wireless network in an office stops working, the problem will probably generate several support requests. Instead of handling each ticket separately, create one ticket describing the problem and set the type to Problem. Next, link the incident tickets to the problem ticket. When you solve the problem ticket, all of the linked incident tickets are solved too.
+
+Problem is used to indicate that the requester is having an issue with your product or service that needs to be resolved.
+
+Task is used when you want to assign the ticket as a task to a specific agent. When you select Task, you also set the Task Due Date.
+
+434 TOTAL
+223 CMS/Themes since 1/1/16
+211 Prevented
+
+171 TOTAL
+120 Analytics/RM since 1/1/16
+51 Prevented
+
+144 TOTAL
+123 Integrations
+
+194 TOTAL
+148 Core/DevOps
+
+1418 TOTAL TECH TEAM SOLVES
+
+
+
+Products:
+
+
+Update HISTORY.md and version.yml
+git add [files changed]
+git commit -m "commit message"
+git push origin branchname
+
+
+*** FORM UPDATEABLES RAKE ***
+heroku run rake g5_forms_updatable:load_for_client -a cls
+
+#CTN export script from Stuart
+
+# 1. `SSH demo`
+# 2. `RAILS_ENV=demo bundle exec rails c`
+# 3. Run everything below in the rails console
+
+class ServicesExport
+  require 'csv'
+
+  def initialize(client_id)
+    client = Client.find(1021)
+    @path = "#{Rails.root}/ps_export_#{1021}.csv"
+    @stores = client.stores
+  end
+
+  def export_numbers
+    csv = build_csv(@stores)
+    # download_csv
+  end
+
+  private
+
+  def build_csv(stores)
+    CSV.open(@path, "wb") do |csv|
+      stores.each do |store|
+        puts "Reading #{store.name}"
+        store.services.each do |service|
+          if service.type == "CallTrackingService"
+            csv << ["#{store.name}", "#{service.tracking_number}", "#{service.cpm_codes}", "#{service.channel}", "#{service.name}"]
+          end
+        end
+      end
+    end
+  end
+end
+
+ServicesExport.new(1021).export_numbers
+
+# 4. Exit the rails console, and exit demo server
+# 5. From core folder, run
+
+# scp demo:core_current/ps_export_1175.csv /Users/travismyrick/Desktop/
+
+# *if client id is 1262%
+
+
+
+
+

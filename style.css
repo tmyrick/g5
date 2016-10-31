@@ -1,0 +1,28 @@
+table{
+	width:100%; 
+	border-collapse:collapse; 
+}
+table td { 
+	padding:7px; border:#000 1px solid;
+}
+	/* provide some minimal visual accomodation for IE8 and below */
+table tr {
+	background: #fff;
+}
+	/*  Define the background color for all the ODD background rows  */
+table tr:nth-child(odd) { 
+	background: #ddd;
+}
+	/*  Define the background color for all the EVEN background rows  */
+table tr:nth-child(even) {
+	background: #bbb;
+}
+
+input[type="button"], input[type="reset"] {
+	width: 100px;
+}
+td.sizes span {
+	margin: 0 5px 0 5px;
+}
+
+
