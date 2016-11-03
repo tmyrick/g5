@@ -19,35 +19,54 @@
 
 
 </style>
+
 <!--This is validating at least 1 checked box on checkbox inputs-->
 
 <script type="text/javascript">
-$(function(){
-    var requiredCheckboxes = $('.options :checkbox[required]');
-    requiredCheckboxes.change(function(){
-        if(requiredCheckboxes.is(':checked')) {
-            requiredCheckboxes.removeAttr('required');
+function valthis() {
+var checkBoxes = document.getElementsByClassName( 'myCheckBox' );
+var isChecked = false;
+    for (var i = 0; i < checkBoxes.length; i++) {
+        if ( checkBoxes[i].checked ) {
+            isChecked = true;
+        };
+    };
+    if ( isChecked ) {
+        alert( 'At least one checkbox checked!' );
         } else {
-            requiredCheckboxes.attr('required', 'required');
+            alert( 'Please, check at least one checkbox!' );
         }
-    });
-});
-
+}
 </script>
 
-  <div class="p-author h-card">
 
-    <div class="form-field">
-      <input type="text" id="first-name" class="first-name required" name="first-name" data-mapping="customer[first-name]" maxlength="50" placeholder="First Name*" required autofocus>
-    </div>
+  <div class="form-group options">
+    <fieldset>
+      <legend class="required">Hours</legend>
+      <label><input class="check1" type="checkbox" name="hours" value="FT">Full Time<br /></label>
+      <label><input class="check1" type="checkbox" name="hours" value="PT">Part Time<br /></label>
+      <label><input class="check1" type="checkbox" name="hours" value="TMP">Temporary<br /></label>
+    </fieldset>
+  </div>
 
-    <div class="form-field">
-      <input type="text" id="last-name" class="last-name required" name="last-name" data-mapping="customer[last-name]" maxlength="50" placeholder="Last Name*" required>
-    </div>
 
-    <div class="form-field">
-      <input type="text" id="previous-name" class="previous-name" name="previous-name" data-mapping="customer[previous-name]" maxlength="50" placeholder="Previous Last Name(s)">
-    </div>
+
+
+
+
+<div class="p-author h-card">
+
+  <div class="form-field">
+    <input type="text" id="first-name" class="first-name required" name="first-name" data-mapping="customer[first-name]" maxlength="50" placeholder="First Name*" required>
+  </div>
+
+  <div class="form-field">
+    <input type="text" id="last-name" class="last-name required" name="last-name" data-mapping="customer[last-name]" maxlength="50" placeholder="Last Name*" required>
+  </div>
+
+  <div class="form-field">
+    <input type="text" id="previous-name" class="previous-name" name="previous-name" data-mapping="customer[previous-name]" maxlength="50" placeholder="Previous Last Name(s)">
+  </div>
 
     <div class="h-adr p-adr">
       <div class="form-field">
@@ -64,7 +83,7 @@ $(function(){
 
       <div class="form-field">
         <select id="p-region" class="p-region required" name="p-region" data-mapping="street_address[region]" required>
-          <option value="" selected>Select a State*</option>
+          <option selected>Select a State*</option>
           <optgroup label="United States">
             <option value="AL">Alabama</option>
             <option value="AK">Alaska</option>
@@ -131,12 +150,14 @@ $(function(){
       <input id="ppostalcode" class="ppostalcode required" name="ppostalcode" type="text" placeholder="Postal Code*" data-mapping="street_address[postal_code]" minlength="5" maxlength="5" required>
     </div>
 
+  </div>
+
   <div class="form-field">
      <input type="tel" id="ptel" class="ptel required" name="ptel" placeholder="Home Phone*" data-mapping="customer[home-phone]" minlength="10" maxlength="10" required>
   </div>
 
   <div class="form-field">
-     <input type="tel" id="cell-ptel" class="cell-ptell" name="cell-ptel" placeholder="Cell Phone" data-mapping="customer[cell-ptel]" min="10" max="10">
+     <input type="tel" id="cell-ptel" class="cell-ptell" name="cell-ptel" placeholder="Cell Phone" data-mapping="customer[cell-ptel]" minlength="10" maxlength="10">
   </div>
 
   <div class="form-field">
@@ -144,50 +165,78 @@ $(function(){
   </div>
 
 <!-- End user info -->
-</div>
-
   <div class="form-field">
     <input type="text" id="position" class="position required" name="position" placeholder="Position Applying For*" data-mapping="customer[position]" maxlength="50" required>
   </div>
 
+<!--
 
   <div class="form-group options">
     <label class="control-label" for="optiontext">At Which Community/Communities (select one)*</label>
 
-      <input type="checkbox" class="community group-required" name="checkbox-group[]" data-mapping="customer[community]" value="Heritage Pointe (Omaha, Neb.)" required/>Heritage Pointe (Omaha, Neb.)<br>
-      <input type="checkbox" class="community group-required" name="checkbox-group[]" data-mapping="customer[community]" value="Heritage Ridge (Bellevue, Neb.)" required/>Heritage Ridge (Bellevue, Neb.)<br>
-      <input type="checkbox" class="community group-required" name="checkbox-group[]" data-mapping="customer[community]" value="Orchard Pointe at Surprise (Surprise, Ariz.)" required/>Orchard Pointe at Surprise (Surprise, Ariz.)<br>
-      <input type="checkbox" class="community group-required" name="checkbox-group[]" data-mapping="customer[community]" value="Orchard Pointe at Arrowhead (Glendale, Ariz.)" required/>Orchard Pointe at Arrowhead (Glendale, Ariz.)<br>
-      <input type="checkbox" class="community group-required" name="checkbox-group[]" data-mapping="customer[community]" value="The Heritage at College View (Hastings, Neb.)" required/>The Heritage at College View (Hastings, Neb.)<br>
-      <input type="checkbox" class="community group-required" name="checkbox-group[]" data-mapping="customer[community]" value="The Heritage at Fox Run (Council Bluffs, Iowa)" required/>The Heritage at Fox Run (Council Bluffs, Iowa)<br>
-      <input type="checkbox" class="community group-required" name="checkbox-group[]" data-mapping="customer[community]" value="The Heritage at Legacy (Omaha, Neb.)" required/>The Heritage at Legacy (Omaha, Neb.)<br>
-      <input type="checkbox" class="community group-required" name="checkbox-group[]" data-mapping="customer[community]" value="The Heritage at Meridian Gardens (Columbus, Neb.)" required/>The Heritage at Meridian Gardens (Columbus, Neb.)<br>
-      <input type="checkbox" class="community group-required" name="checkbox-group[]" data-mapping="customer[community]" value="The Heritage at Northern Hills (Sioux City, Iowa)" required/>The Heritage at Northern Hills (Sioux City, Iowa)<br>
-      <input type="checkbox" class="community group-required" name="checkbox-group[]" data-mapping="customer[community]" value="The Heritage at Sagewood (Grand Island, Neb.)" required/>The Heritage at Sagewood (Grand Island, Neb.)<br>
-      <input type="checkbox" class="community group-required" name="checkbox-group[]" data-mapping="customer[community]" value="The Heritage at Shalimar Gardens (Fremont, Neb.)" required/>The Heritage at Shalimar Gardens (Fremont, Neb.)<br>
-      <input type="checkbox" class="community group-required" name="checkbox-group[]" data-mapping="customer[community]" value="The Heritage at Sterling Ridge (Omaha, Neb.)" required/>The Heritage at Sterling Ridge (Omaha, Neb.)<br>
-    </label>
+    <input type="checkbox"" value="01" required/>Heritage Pointe (Omaha, Neb.)<br>
+    <input type="checkbox"" value="02" required/>Heritage Ridge (Bellevue, Neb.)<br>
+    <input type="checkbox"" value="03" required/>Orchard Pointe at Surprise (Surprise, Ariz.)<br>
+    <input type="checkbox"" value="04" required/>Orchard Pointe at Arrowhead (Glendale, Ariz.)<br>
+    <input type="checkbox"" value="05" required/>The Heritage at College View (Hastings, Neb.)<br>
+    <input type="checkbox"" value="06" required/>The Heritage at Fox Run (Council Bluffs, Iowa)<br>
+    <input type="checkbox"" value="07" required/>The Heritage at Legacy (Omaha, Neb.)<br>
+    <input type="checkbox"" value="08" required/>The Heritage at Northern Hills (Sioux City, Iowa)<br>
+    <input type="checkbox"" value="09" required/>The Heritage at Sagewood (Grand Island, Neb.)<br>
+    <input type="checkbox"" value="10" required/>The Heritage at Shalimar Gardens (Fremont, Neb.)<br>
+    <input type="checkbox"" value="11" required/>The Heritage at Sterling Ridge (Omaha, Neb.)<br>
+    <input type="checkbox"" value="12" required/>The Heritage at Meridian Gardens (Columbus, Neb.)<br>
 
   </div>
 
   <div class="form-group options">
     <label class="control-label" for="optiontext">Hours (select one)*</label>
 
-    <input type="checkbox" class="hours group-required" name="checkbox-group[]" data-mapping="customer[hours]" value="Full Time" required/>Full Time<br />
-    <input type="checkbox" class="hours group-required" name="checkbox-group[]" data-mapping="customer[hours]" value="Part Time" required/>Part Time<br />
-    <input type="checkbox" class="hours group-required" name="checkbox-group[]" data-mapping="customer[hours]" value="Temporary" required/>Temporary<br />
+    <input type="checkbox" class="hours" name="hours[hours]" value="FT" required/>Full Time<br />
+    <input type="checkbox" class="hours" name="hours[hours]" value="PT" required/>Part Time<br />
+    <input type="checkbox" class="hours" name="hours[hours]" value="TMP" required/>Temporary<br />
 
+  </div>
+
+  -->
+
+  <div class="form-group options">
+    <fieldset>
+      <legend class="required">At Which Community/Communities</legend>
+      <label><input type="checkbox" name="community" value="Heritage Pointe (Omaha, Neb.)" required/>Heritage Pointe (Omaha, Neb.)<br></label>
+      <label><input type="checkbox" name="community" value="Heritage Ridge (Bellevue, Neb.)" required/>Heritage Ridge (Bellevue, Neb.)<br></label>
+      <label><input type="checkbox" name="community" value="Orchard Pointe at Surprise (Surprise, Ariz.)" required/>Orchard Pointe at Surprise (Surprise, Ariz.)<br></label>
+      <label><input type="checkbox" name="community" value="Orchard Pointe at Arrowhead (Glendale, Ariz.)" required/>Orchard Pointe at Arrowhead (Glendale, Ariz.)<br></label>
+      <label><input type="checkbox" name="community" value="The Heritage at College View (Hastings, Neb.)" required/>The Heritage at College View (Hastings, Neb.)<br></label>
+      <label><input type="checkbox" name="community" value="The Heritage at Fox Run (Council Bluffs, Iowa)" required/>The Heritage at Fox Run (Council Bluffs, Iowa)<br></label>
+      <label><input type="checkbox" name="community" value="The Heritage at Legacy (Omaha, Neb.)" required/>The Heritage at Legacy (Omaha, Neb.)<br></label>
+      <label><input type="checkbox" name="community" value="The Heritage at Northern Hills (Sioux City, Iowa)" required/>The Heritage at Northern Hills (Sioux City, Iowa)<br></label>
+      <label><input type="checkbox" name="community" value="The Heritage at Sagewood (Grand Island, Neb.)" required/>The Heritage at Sagewood (Grand Island, Neb.)<br></label>
+      <label><input type="checkbox" name="community" value="The Heritage at Shalimar Gardens (Fremont, Neb.)" required/>The Heritage at Shalimar Gardens (Fremont, Neb.)<br></label>
+      <label><input type="checkbox" name="community" value="The Heritage at Sterling Ridge (Omaha, Neb.)" required/>The Heritage at Sterling Ridge (Omaha, Neb.)<br></label>
+      <label><input type="checkbox" name="community" value="The Heritage at Meridian Gardens (Columbus, Neb.)" required/>The Heritage at Meridian Gardens (Columbus, Neb.)<br></label>
+    </fieldset>
   </div>
 
   <div class="form-group options">
-    <label class="control-label" for="optiontext">Shift Preference (select one)*</label>
-
-    <input type="checkbox" class="shift-preference group-required" name="shift-preference" data-mapping="customer[shift-preference]" value="Days" required/>Days<br />
-    <input type="checkbox" class="shift-preference group-required" name="shift-preference" data-mapping="customer[shift-preference]" value="Evenings" required/>Evenings<br />
-    <input type="checkbox" class="shift-preference group-required" name="shift-preference" data-mapping="customer[shift-preference]" value="Nights" required/>Nights<br />
-    <input type="checkbox" class="shift-preference" name="shift-preference" data-mapping="customer[shift-preference]" value="Any Shift" required/>Any Shift<br />
-
+    <fieldset>
+      <legend class="required">Hours</legend>
+      <label><input type="checkbox" name="hours" value="FT" required/>Full Time<br /></label>
+      <label><input type="checkbox" name="hours" value="PT" required/>Part Time<br /></label>
+      <label><input type="checkbox" name="hours" value="TMP" required/>Temporary<br /></label>
+    </fieldset>
   </div>
+
+  <div class="form-group options">
+    <fieldset>
+      <legend class="required">Shift Preference</legend>
+      <label><input type="checkbox" name="shift" value="days" required/>Days<br/></label>
+      <label><input type="checkbox" name="shift" value="evenings" required/>Evenings<br/></label>
+      <label><input type="checkbox" name="shift" value="nights" required/>Nights<br/></label>
+      <label><input type="checkbox" name="shift" value="any" required/>Any Shift<br/></label>
+    </fieldset>
+  </div>
+
 
   <div class="form-field">
     <input type="text" id="desired-wage" class="desired-wage" name="desired-wage" data-mapping="customer[desired-wage]" maxlength="50" placeholder="Desired Wage">
@@ -205,11 +254,13 @@ $(function(){
     <input type="text" id="how-you-heard" class="how-you-heard" name="how-you-heard" data-mapping="customer[how-you-heard]" maxlength="50" placeholder="How did you hear about this position?">
   </div>
 
+
   <div class="form-field">
-    <label for="have-you-applied" class="required">Have you ever applied for a position at Heritage Communities before?</label>
-    <input type="radio" id="have-you-appliedy" class="have-you-applied" name="have-you-applied" data-mapping="customer[have-you-applied]" required>Yes<br />
-    <input type="radio" id="have-you-appliedn" class="have-you-applied" name="have-you-applied" data-mapping="customer[have-you-applied]" required>No<br />
-    </div>
+    <fieldset>
+      <legend class="required">Have you ever applied for a position at Heritage Communities before?</legend>
+      <label><input type="radio" class="have-you-applied" name="have-you-applied" data-mapping="customer[have-you-applied]" value="Yes"> Yes</label>
+      <label><input type="radio" class="have-you-applied" name="have-you-applied" data-mapping="customer[have-you-applied]" value="No" checked> No</label>
+    </fieldset>
   </div>
 
   <div class="note">
@@ -225,21 +276,27 @@ $(function(){
   </div>
 
   <div class="form-field">
-    <label for="years">Are you 18 years of age?</label>
-    <input type="radio" id="yearsy" class="years" name="years" data-mapping="customer[years]" required/>Yes<br />
-    <input type="radio" id="yearsn" class="years" name="years" data-mapping="customer[years]" required/>No<br />
+    <fieldset>
+      <legend class="required">Are you 18 years of age?</legend>
+      <label><input type="radio" class="years" name="years" data-mapping="customer[years]" value="Yes"> Yes</label>
+      <label><input type="radio" class="years" name="years" data-mapping="customer[years]" value="No" checked> No</label>
+    </fieldset>
   </div>
 
   <div class="form-field">
-    <label for="legal">Are you legally authorized to work in the U.S.?</label>
-    <input type="radio" id="legal" class="legal" name="legal" data-mapping="customer[legal]" required>Yes<br />
-    <input type="radio" id="legal" class="legal" name="legal" data-mapping="customer[legal]" required>No<br />
+    <fieldset>
+      <legend class="required">Are you legally authorized to work in the U.S.?</legend>
+      <label><input type="radio" class="legal" name="legal" data-mapping="customer[legal]" value="Yes"> Yes</label>
+      <label><input type="radio" class="legal" name="legal" data-mapping="customer[legal]" value="No" checked> No</label>
+    </fieldset>
   </div>
 
   <div class="form-field">
-    <label for="military">Have you served in the military?</label>
-    <input type="radio" id="military" class="military" name="military" data-mapping="customer[military]" required>Yes<br />
-    <input type="radio" id="military" class="military" name="military" data-mapping="customer[military]" required>No<br />
+    <fieldset>
+      <legend class="required">Have you served in the military?</legend>
+      <label><input type="radio" class="military" name="military" data-mapping="customer[military]" value="Yes"> Yes</label>
+      <label><input type="radio" class="military" name="military" data-mapping="customer[military]" value="No" checked> No</label>
+    </fieldset>
   </div>
 
   <br><hr><br>
@@ -262,7 +319,7 @@ $(function(){
   <div class="form-field">Date (Month/Year)<br>
 
     <select id="employer-month" class="employer-month" name="employer-month" data-mapping="employer[employer-month]">
-      <option value="" selected>Select a Month</option>
+      <option selected>Select a Month</option>
       <option value="01">January</option>
       <option value="02">February</option>
       <option value="03">March</option>
@@ -279,6 +336,7 @@ $(function(){
 
   </div>
 
+
   <div class="form-field">
     <input type="text" class="employer-year" name="employer-year" data-mapping="employer[employer-year]" maxlength="10" placeholder="Year">
   </div>
@@ -288,7 +346,7 @@ $(function(){
   </div>
 
   <div class="form-field">
-    <input type="text" id="employer-work" class="employer-work" name="employer-work" data-mapping="employer[employer-work]" maxlength="30" placeholder="Work Performed">
+    <textarea name="former-employer-reason" placeholder="Work Performed" maxlength="250"></textarea>
   </div>
 
   <br><hr><br>
@@ -314,7 +372,7 @@ $(function(){
   <div class="form-field">Date (Month/Year)<br>
 
     <select id="former-employer-month" class="former-employer-month" name="former-employer-month" data-mapping="employer[former-employer-month]">
-      <option value="" selected>Select a Month</option>
+      <option selected>Select a Month</option>
       <option value="01">January</option>
       <option value="02">February</option>
       <option value="03">March</option>
@@ -348,7 +406,7 @@ $(function(){
   <h4>Education Section</h4><br>
 
   <div class="form-field">
-    <input type="text" id="highest-grade" class="highest-grade" name="highest-grade" data-mapping="education[highest-grade]" maxlength="50" placeholder="Highest Grade Completed" required/>
+    <input type="text" id="highest-grade" class="highest-grade" name="highest-grade" data-mapping="education[highest-grade]" maxlength="50" placeholder="Highest Grade Completed*" required/>
   </div>
 
   <div class="form-field">
@@ -383,11 +441,17 @@ $(function(){
     <p><em>Please exclude those which by name or character indicate race color, religion, gender, age, disability or national origin.</em></p>
   </div><br>
 
+
+
   <div class="form-field">
-    <label for="convicted">Have you been convicted of a felony that has not been expunged, sealed, pardoned, annulled, statutorily eradicated or dismissed upon condition of probation in this state or any other state?</label>
-    <input type="radio" id="convictedy" class="convicted" name="convicted" data-mapping="customer[convicted]" required/>Yes<br />
-    <input type="radio" id="convictedn" class="convicted" name="convicted" data-mapping="customer[convicted]" required/>No<br />
+    <fieldset>
+      <legend class="required">Have you been convicted of a felony that has not been expunged, sealed, pardoned, annulled, statutorily eradicated or dismissed upon condition of probation in this state or any other state?</legend>
+      <label><input type="radio" class="convicted" name="convicted" data-mapping="customer[convicted]" value="Yes"> Yes</label>
+      <label><input type="radio" class="convicted" name="convicted" data-mapping="customer[convicted]" value="No" checked> No</label>
+    </fieldset>
   </div>
+
+
 
   <div class="note">
     <p><em>Convictions will not be an absolute bar to employment unless provided by law.</em></p>
@@ -406,7 +470,7 @@ $(function(){
   </div>
 
   <div class="form-field">Date(s)<br>
-    <input type="date">
+    <input type="date" name="date" data-mapping="customer[date]">
   </div>
 
   <br><hr><br>
@@ -418,12 +482,14 @@ $(function(){
   </div>
 
   <div class="form-field">
-    <label for="agree">I agree to all of the above terms and conditions*</label>
-    <input type="radio" id="agreey" class="agree" name="agree" data-mapping="customer[agree]" required>Yes<br />
-    <input type="radio" id="agreen" class="agree" name="agree" data-mapping="customer[agree]">No<br />
+    <fieldset>
+      <legend class="required">I agree to all of the above terms and conditions?</legend>
+      <label><input type="radio" class="agree" name="agree" data-mapping="customer[agree]" value="Yes"> Yes</label>
+      <label><input type="radio" class="agree" name="agree" data-mapping="customer[agree]" value="No" checked> No</label>
+    </fieldset>
   </div>
 
-<input type="submit" class="submit" value="Send" /><br>
+<input type="submit" value="Send" /><br>
 <span class="forminstruction"><span style="color:red;">*</span> Required Field</span>
 
 
