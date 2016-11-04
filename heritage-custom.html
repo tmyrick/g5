@@ -23,35 +23,40 @@
 <!--This is validating at least 1 checked box on checkbox inputs-->
 
 <script type="text/javascript">
-function valthis() {
-var checkBoxes = document.getElementsByClassName( 'myCheckBox' );
-var isChecked = false;
-    for (var i = 0; i < checkBoxes.length; i++) {
-        if ( checkBoxes[i].checked ) {
-            isChecked = true;
-        };
-    };
-    if ( isChecked ) {
-        alert( 'At least one checkbox checked!' );
-        } else {
-            alert( 'Please, check at least one checkbox!' );
-        }
+
+function setRequire(val1, val2, val3) {
+  $(val1).attr('required', 'required');
+  $(val2).attr('required', 'required');
+  $(val3).attr('required', 'required');
 }
+
+function checkRequired(value) {
+  if($(value).is(':checked')) {
+    $(value).removeAttr('required');
+  } else {
+    $(value).attr('required', 'required');
+  }
+}
+
+$(function(){
+  var hours = $('.hours :checkbox');
+    var community = $('.community :checkbox');
+    var shift = $('.shift :checkbox');
+    setRequire(hours, community, other);
+  hours.change(function() {
+      checkRequired(hours);
+    });
+
+    community.change(function() {
+      checkRequired(community);
+    });
+
+    shift.change(function() {
+      checkRequired(shift);
+    });
+});
+
 </script>
-
-
-  <div class="form-group options">
-    <fieldset>
-      <legend class="required">Hours</legend>
-      <label><input class="check1" type="checkbox" name="hours" value="FT">Full Time<br /></label>
-      <label><input class="check1" type="checkbox" name="hours" value="PT">Part Time<br /></label>
-      <label><input class="check1" type="checkbox" name="hours" value="TMP">Temporary<br /></label>
-    </fieldset>
-  </div>
-
-
-
-
 
 
 <div class="p-author h-card">
@@ -82,7 +87,7 @@ var isChecked = false;
       </div>
 
       <div class="form-field">
-        <select id="p-region" class="p-region required" name="p-region" data-mapping="street_address[region]" required>
+        <select required="required" id="p-region" class="p-region required" name="p-region" data-mapping="street_address[region]">
           <option selected>Select a State*</option>
           <optgroup label="United States">
             <option value="AL">Alabama</option>
@@ -169,38 +174,8 @@ var isChecked = false;
     <input type="text" id="position" class="position required" name="position" placeholder="Position Applying For*" data-mapping="customer[position]" maxlength="50" required>
   </div>
 
-<!--
 
-  <div class="form-group options">
-    <label class="control-label" for="optiontext">At Which Community/Communities (select one)*</label>
-
-    <input type="checkbox"" value="01" required/>Heritage Pointe (Omaha, Neb.)<br>
-    <input type="checkbox"" value="02" required/>Heritage Ridge (Bellevue, Neb.)<br>
-    <input type="checkbox"" value="03" required/>Orchard Pointe at Surprise (Surprise, Ariz.)<br>
-    <input type="checkbox"" value="04" required/>Orchard Pointe at Arrowhead (Glendale, Ariz.)<br>
-    <input type="checkbox"" value="05" required/>The Heritage at College View (Hastings, Neb.)<br>
-    <input type="checkbox"" value="06" required/>The Heritage at Fox Run (Council Bluffs, Iowa)<br>
-    <input type="checkbox"" value="07" required/>The Heritage at Legacy (Omaha, Neb.)<br>
-    <input type="checkbox"" value="08" required/>The Heritage at Northern Hills (Sioux City, Iowa)<br>
-    <input type="checkbox"" value="09" required/>The Heritage at Sagewood (Grand Island, Neb.)<br>
-    <input type="checkbox"" value="10" required/>The Heritage at Shalimar Gardens (Fremont, Neb.)<br>
-    <input type="checkbox"" value="11" required/>The Heritage at Sterling Ridge (Omaha, Neb.)<br>
-    <input type="checkbox"" value="12" required/>The Heritage at Meridian Gardens (Columbus, Neb.)<br>
-
-  </div>
-
-  <div class="form-group options">
-    <label class="control-label" for="optiontext">Hours (select one)*</label>
-
-    <input type="checkbox" class="hours" name="hours[hours]" value="FT" required/>Full Time<br />
-    <input type="checkbox" class="hours" name="hours[hours]" value="PT" required/>Part Time<br />
-    <input type="checkbox" class="hours" name="hours[hours]" value="TMP" required/>Temporary<br />
-
-  </div>
-
-  -->
-
-  <div class="form-group options">
+  <div class="form-group community">
     <fieldset>
       <legend class="required">At Which Community/Communities</legend>
       <label><input type="checkbox" name="community" value="Heritage Pointe (Omaha, Neb.)" required/>Heritage Pointe (Omaha, Neb.)<br></label>
@@ -218,16 +193,16 @@ var isChecked = false;
     </fieldset>
   </div>
 
-  <div class="form-group options">
+  <div class="form-group hours">
     <fieldset>
       <legend class="required">Hours</legend>
-      <label><input type="checkbox" name="hours" value="FT" required/>Full Time<br /></label>
-      <label><input type="checkbox" name="hours" value="PT" required/>Part Time<br /></label>
-      <label><input type="checkbox" name="hours" value="TMP" required/>Temporary<br /></label>
+      <label><input type="checkbox" name="hours" value="FT">Full Time<br /></label>
+      <label><input type="checkbox" name="hours" value="PT">Part Time<br /></label>
+      <label><input type="checkbox" name="hours" value="TMP">Temporary<br /></label>
     </fieldset>
   </div>
 
-  <div class="form-group options">
+  <div class="form-group shift">
     <fieldset>
       <legend class="required">Shift Preference</legend>
       <label><input type="checkbox" name="shift" value="days" required/>Days<br/></label>
@@ -236,7 +211,6 @@ var isChecked = false;
       <label><input type="checkbox" name="shift" value="any" required/>Any Shift<br/></label>
     </fieldset>
   </div>
-
 
   <div class="form-field">
     <input type="text" id="desired-wage" class="desired-wage" name="desired-wage" data-mapping="customer[desired-wage]" maxlength="50" placeholder="Desired Wage">
