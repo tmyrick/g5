@@ -4,8 +4,8 @@
     font-weight: bold;
   }
 
-  div.form-group input {
-    margin-right: 2px ;
+  fieldset input {
+    margin-right: 5px ;
   }
 
   div.note p {
@@ -23,7 +23,6 @@
 <!--This is validating at least 1 checked box on checkbox inputs-->
 
 <script type="text/javascript">
-
 function setRequire(val1, val2, val3) {
   $(val1).attr('required', 'required');
   $(val2).attr('required', 'required');
@@ -42,7 +41,7 @@ $(function(){
   var hours = $('.hours :checkbox');
     var community = $('.community :checkbox');
     var shift = $('.shift :checkbox');
-    setRequire(hours, community, other);
+    setRequire(hours, community, shift);
   hours.change(function() {
       checkRequired(hours);
     });
@@ -60,36 +59,47 @@ $(function(){
 
 
 <div class="p-author h-card">
+<h2>Personal Profile</h2><br>
 
   <div class="form-field">
+    <legend class="required">First Name</legend>
     <input type="text" id="first-name" class="first-name required" name="first-name" data-mapping="customer[first-name]" maxlength="50" placeholder="First Name*" required>
   </div>
 
   <div class="form-field">
+    <legend class="required">Last Name</legend>
     <input type="text" id="last-name" class="last-name required" name="last-name" data-mapping="customer[last-name]" maxlength="50" placeholder="Last Name*" required>
   </div>
 
   <div class="form-field">
+    <legend>Previous Name</legend>
     <input type="text" id="previous-name" class="previous-name" name="previous-name" data-mapping="customer[previous-name]" maxlength="50" placeholder="Previous Last Name(s)">
   </div>
 
-    <div class="h-adr p-adr">
-      <div class="form-field">
-        <input type="text" id="p-street-address" class="p-street-address required" name="p-street-address" data-mapping="street_address[street_address]" maxlength="90" placeholder="Street Address*" required>
-      </div>
+  <div class="h-adr p-adr">
+    <div class="form-field">
+      <legend class="required">Street Address</legend>
+      <input type="text" id="street-address" class="street-address required" name="street-address" data-mapping="address[street_address]" maxlength="90" placeholder="Street Address*" required>
+    </div>
 
-      <div class="form-field">
-        <input type="text" id="2p-street-address" class="secondary_street_address" name="secondary_street_address" data-mapping="street_address[secondary_street_address]" maxlength="90" placeholder="Address Line 2">
-      </div>
+    <div class="form-field">
+      <legend>Address Line 2</legend>
+      <input type="text" id="street-address" class="secondary_street_address" name="secondary_street_address" data-mapping="address[secondary_street_address]" maxlength="90" placeholder="Address Line 2">
+    </div>
 
-      <div class="form-field">
-        <input type="text" id="p-locality" class="p-locality required" name="p-locality" data-mapping="street_address[locality]" maxlength="50" placeholder="City*" required>
-      </div>
+    <div class="form-field">
+      <legend class="required">City</legend>
+      <input type="text" id="locality" class="locality required" name="locality" data-mapping="address[locality]" maxlength="50" placeholder="City*" required>
+    </div>
 
-      <div class="form-field">
-        <select required="required" id="p-region" class="p-region required" name="p-region" data-mapping="street_address[region]">
-          <option selected>Select a State*</option>
-          <optgroup label="United States">
+    <div class="form-field">
+      <legend class="required">State</legend>
+      <select id="state" name="region" required="required" class="size" data-mapping="address[region]">
+
+          <option value="">Select a State*</option>
+
+          <optgroup value="0" label="United States">
+
             <option value="AL">Alabama</option>
             <option value="AK">Alaska</option>
             <option value="AZ">Arizona</option>
@@ -141,327 +151,330 @@ $(function(){
             <option value="WV">West Virginia</option>
             <option value="WI">Wisconsin</option>
             <option value="WY">Wyoming</option>
+
           </optgroup>
-          <optgroup label="Armed Forces">
+
+          <optgroup  value="0" label="Armed Forces">
+
             <option value="Armed Forces Americas">Armed Forces Americas</option>
             <option value="Armed Forces Europe">Armed Forces Europe</option>
             <option value="Armed Forces Pacific">Armed Forces Pacific</option>
-          </optgroup>
-        </select>
-      </div>
-    </div>
+
+        </optgroup>
+
+      </select>
+
+    </div><!--End the state dropdown div -->
 
     <div class="form-field">
-      <input id="ppostalcode" class="ppostalcode required" name="ppostalcode" type="text" placeholder="Postal Code*" data-mapping="street_address[postal_code]" minlength="5" maxlength="5" required>
+      <legend class="required">Zip Code</legend>
+      <input id="postalcode" class="postalcode required" name="postalcode" type="text" placeholder="Zip Code*" data-mapping="address[postal_code]" minlength="5" maxlength="5" required>
     </div>
 
   </div>
 
-  <div class="form-field">
-     <input type="tel" id="ptel" class="ptel required" name="ptel" placeholder="Home Phone*" data-mapping="customer[home-phone]" minlength="10" maxlength="10" required>
-  </div>
-
-  <div class="form-field">
-     <input type="tel" id="cell-ptel" class="cell-ptell" name="cell-ptel" placeholder="Cell Phone" data-mapping="customer[cell-ptel]" minlength="10" maxlength="10">
-  </div>
-
-  <div class="form-field">
-    <input type="email" id="email" class="email required" name="email" placeholder="Email*" data-mapping="customer[email]" maxlength="50" required>
-  </div>
-
-<!-- End user info -->
-  <div class="form-field">
-    <input type="text" id="position" class="position required" name="position" placeholder="Position Applying For*" data-mapping="customer[position]" maxlength="50" required>
-  </div>
-
-
-  <div class="form-group community">
-    <fieldset>
-      <legend class="required">At Which Community/Communities</legend>
-      <label><input type="checkbox" name="community" value="Heritage Pointe (Omaha, Neb.)" required/>Heritage Pointe (Omaha, Neb.)<br></label>
-      <label><input type="checkbox" name="community" value="Heritage Ridge (Bellevue, Neb.)" required/>Heritage Ridge (Bellevue, Neb.)<br></label>
-      <label><input type="checkbox" name="community" value="Orchard Pointe at Surprise (Surprise, Ariz.)" required/>Orchard Pointe at Surprise (Surprise, Ariz.)<br></label>
-      <label><input type="checkbox" name="community" value="Orchard Pointe at Arrowhead (Glendale, Ariz.)" required/>Orchard Pointe at Arrowhead (Glendale, Ariz.)<br></label>
-      <label><input type="checkbox" name="community" value="The Heritage at College View (Hastings, Neb.)" required/>The Heritage at College View (Hastings, Neb.)<br></label>
-      <label><input type="checkbox" name="community" value="The Heritage at Fox Run (Council Bluffs, Iowa)" required/>The Heritage at Fox Run (Council Bluffs, Iowa)<br></label>
-      <label><input type="checkbox" name="community" value="The Heritage at Legacy (Omaha, Neb.)" required/>The Heritage at Legacy (Omaha, Neb.)<br></label>
-      <label><input type="checkbox" name="community" value="The Heritage at Northern Hills (Sioux City, Iowa)" required/>The Heritage at Northern Hills (Sioux City, Iowa)<br></label>
-      <label><input type="checkbox" name="community" value="The Heritage at Sagewood (Grand Island, Neb.)" required/>The Heritage at Sagewood (Grand Island, Neb.)<br></label>
-      <label><input type="checkbox" name="community" value="The Heritage at Shalimar Gardens (Fremont, Neb.)" required/>The Heritage at Shalimar Gardens (Fremont, Neb.)<br></label>
-      <label><input type="checkbox" name="community" value="The Heritage at Sterling Ridge (Omaha, Neb.)" required/>The Heritage at Sterling Ridge (Omaha, Neb.)<br></label>
-      <label><input type="checkbox" name="community" value="The Heritage at Meridian Gardens (Columbus, Neb.)" required/>The Heritage at Meridian Gardens (Columbus, Neb.)<br></label>
-    </fieldset>
-  </div>
-
-  <div class="form-group hours">
-    <fieldset>
-      <legend class="required">Hours</legend>
-      <label><input type="checkbox" name="hours" value="FT">Full Time<br /></label>
-      <label><input type="checkbox" name="hours" value="PT">Part Time<br /></label>
-      <label><input type="checkbox" name="hours" value="TMP">Temporary<br /></label>
-    </fieldset>
-  </div>
-
-  <div class="form-group shift">
-    <fieldset>
-      <legend class="required">Shift Preference</legend>
-      <label><input type="checkbox" name="shift" value="days" required/>Days<br/></label>
-      <label><input type="checkbox" name="shift" value="evenings" required/>Evenings<br/></label>
-      <label><input type="checkbox" name="shift" value="nights" required/>Nights<br/></label>
-      <label><input type="checkbox" name="shift" value="any" required/>Any Shift<br/></label>
-    </fieldset>
-  </div>
-
-  <div class="form-field">
-    <input type="text" id="desired-wage" class="desired-wage" name="desired-wage" data-mapping="customer[desired-wage]" maxlength="50" placeholder="Desired Wage">
-  </div>
-
-  <div class="form-field">
-    <input type="text" id="desired-mo-wage" class="desired-mo-wage" name="desired-mo-wage" data-mapping="customer[desired-mo-wage]" maxlength="50" placeholder="Desired Monthly Wage">
-  </div>
-
-  <div class="form-field">
-    <input type="text" id="start-date" class="start-date" name="start-date" data-mapping="customer[start-date]" maxlength="50" placeholder="When will you be available to start work?">
-  </div>
-
-  <div class="form-field">
-    <input type="text" id="how-you-heard" class="how-you-heard" name="how-you-heard" data-mapping="customer[how-you-heard]" maxlength="50" placeholder="How did you hear about this position?">
-  </div>
-
-
-  <div class="form-field">
-    <fieldset>
-      <legend class="required">Have you ever applied for a position at Heritage Communities before?</legend>
-      <label><input type="radio" class="have-you-applied" name="have-you-applied" data-mapping="customer[have-you-applied]" value="Yes"> Yes</label>
-      <label><input type="radio" class="have-you-applied" name="have-you-applied" data-mapping="customer[have-you-applied]" value="No" checked> No</label>
-    </fieldset>
-  </div>
-
-  <div class="note">
-    <p><em>If yes, please answer the following two questions.</em></p>
-  </div>
-
-  <div class="form-field">
-    <input type="text" class="when-applied" name="when-applied" data-mapping="customer[when-applied]" placeholder="When?">
-  </div>
-
-  <div class="form-field">
-    <input type="text" class="wwhich-position" name="which-position" data-mapping="customer[which-position]" placeholder="Which Position?">
-  </div>
-
-  <div class="form-field">
-    <fieldset>
-      <legend class="required">Are you 18 years of age?</legend>
-      <label><input type="radio" class="years" name="years" data-mapping="customer[years]" value="Yes"> Yes</label>
-      <label><input type="radio" class="years" name="years" data-mapping="customer[years]" value="No" checked> No</label>
-    </fieldset>
-  </div>
-
-  <div class="form-field">
-    <fieldset>
-      <legend class="required">Are you legally authorized to work in the U.S.?</legend>
-      <label><input type="radio" class="legal" name="legal" data-mapping="customer[legal]" value="Yes"> Yes</label>
-      <label><input type="radio" class="legal" name="legal" data-mapping="customer[legal]" value="No" checked> No</label>
-    </fieldset>
-  </div>
-
-  <div class="form-field">
-    <fieldset>
-      <legend class="required">Have you served in the military?</legend>
-      <label><input type="radio" class="military" name="military" data-mapping="customer[military]" value="Yes"> Yes</label>
-      <label><input type="radio" class="military" name="military" data-mapping="customer[military]" value="No" checked> No</label>
-    </fieldset>
-  </div>
-
-  <br><hr><br>
-
-  <h3>Employment Experience</h3>
-  <h4>Current Employer Sub‐Section</h4><br>
-
-  <div class="form-field">
-    <input type="text" id="employer-name" class="employer-name" name="employer-name" data-mapping="employer[employer-name]" maxlength="30" placeholder="Name">
-  </div>
-
-  <div class="form-field">
-    <input type="text" id="employer-address" class="employer-address" name="employer-address" data-mapping="employer[employer-address]" maxlength="30" placeholder="Employer Address">
-  </div>
-
-  <div class="form-field">
-    <input type="text" id="employer-contact" class="employer-contact" name="employer-contact" data-mapping="employer[employer-contact]" maxlength="30" placeholder="Contact Person / Phone">
-  </div>
-
-  <div class="form-field">Date (Month/Year)<br>
-
-    <select id="employer-month" class="employer-month" name="employer-month" data-mapping="employer[employer-month]">
-      <option selected>Select a Month</option>
-      <option value="01">January</option>
-      <option value="02">February</option>
-      <option value="03">March</option>
-      <option value="04">April</option>
-      <option value="05">May</option>
-      <option value="06">June</option>
-      <option value="07">July</option>
-      <option value="08">August</option>
-      <option value="09">September</option>
-      <option value="10">October</option>
-      <option value="11">November</option>
-      <option value="12">December</option>
-    </select><br>
-
-  </div>
-
-
-  <div class="form-field">
-    <input type="text" class="employer-year" name="employer-year" data-mapping="employer[employer-year]" maxlength="10" placeholder="Year">
-  </div>
-
-  <div class="form-field">
-    <input type="text" id="employer-salary" class="employer-salary" name="employer-salary" data-mapping="employer[employer-salary]" placeholder="Salary">
-  </div>
-
-  <div class="form-field">
-    <textarea name="former-employer-reason" placeholder="Work Performed" maxlength="250"></textarea>
-  </div>
-
-  <br><hr><br>
-
-  <h4>Former Employer (past 7 years)</h4><br>
-
-  <div class="form-field">
-    <input type="text" id="former-employer-name" class="former-employer-name" name="former-employer-name" data-mapping="employer[former-employer-name]" maxlength="30" placeholder="Name">
-  </div>
-
-  <div class="form-field">
-    <input type="text" id="former-employer-address" class="former-employer-address" name="former-employer-address" data-mapping="employer[former-employer-address]" maxlength="30" placeholder="Address">
-  </div>
-
-  <div class="form-field">
-    <input type="text" id="former-employer-contact" class="former-employer-contact" name="former-employer-contact" data-mapping="employer[former-employer-contact]" maxlength="30" placeholder="Contact Person Name">
-  </div>
-
-  <div class="form-field">
-    <input type="tel" id="former-employee-phone" class="former-employee-phone" name="former-employee-phone" data-mapping="employer[former-employee-phone]" maxlength="13" placeholder="Contact Person Phone Number (XXX‐XXX‐XXXX)" >
-  </div>
-
-  <div class="form-field">Date (Month/Year)<br>
-
-    <select id="former-employer-month" class="former-employer-month" name="former-employer-month" data-mapping="employer[former-employer-month]">
-      <option selected>Select a Month</option>
-      <option value="01">January</option>
-      <option value="02">February</option>
-      <option value="03">March</option>
-      <option value="04">April</option>
-      <option value="05">May</option>
-      <option value="06">June</option>
-      <option value="07">July</option>
-      <option value="08">August</option>
-      <option value="09">September</option>
-      <option value="10">October</option>
-      <option value="11">November</option>
-      <option value="12">December</option>
-    </select><br>
-
-  </div>
-
-  <div class="form-field">
-    <input type="text" class="former-employer-year" name="former-employer-year" data-mapping="employer[former-employer-year]" maxlength="10" placeholder="Year">
-  </div>
-
-  <div class="form-field">
-    <input type="text" id="former-employer-salary" class="former-employer-salary" name="former-employer-salary" data-mapping="employer[former-employer-salary]" placeholder="Salary">
-  </div>
-
-  <div class="form-field">
-    <textarea name="former-employer-reason" placeholder="Work Performed/Reason for Leaving" maxlength="250"></textarea>
-  </div>
-
-  <br><hr><br>
-
-  <h4>Education Section</h4><br>
-
-  <div class="form-field">
-    <input type="text" id="highest-grade" class="highest-grade" name="highest-grade" data-mapping="education[highest-grade]" maxlength="50" placeholder="Highest Grade Completed*" required/>
-  </div>
-
-  <div class="form-field">
-    <input type="text" id="degree" class="degree" name="degree" data-mapping="education[degree]" maxlength="50" placeholder="Degree/Diploma">
-  </div>
-
-  <div class="form-field">
-    <input type="text" id="other-training" class="other-training" name="other-training" data-mapping="education[other-training]" maxlength="50" placeholder="Other Training">
-  </div>
-
-  <br><hr><br>
-
-  <h4>Licenses/Certification Held Sub-Section</h4><br>
-
-  <div class="form-field">
-    <input type="text" id="licensure" class="licensure" name="licensure" data-mapping="customer[licensure]" maxlength="30" placeholder="Type of Licensure">
-  </div>
-
-  <div class="form-field">
-    <input type="text" id="licensure-state" class="licensure-state" name="licensure-state" data-mapping="customer[licensure-state]" maxlength="30" placeholder="State Issued In">
-  </div>
-
-  <div class="form-field">
-    <input type="text" id="license-expiration" class="license-expiration" name="license-expiration" data-mapping="customer[license-expiration]" maxlength="30" placeholder="Expiration Date">
-  </div>
-
-  <div class="form-field">Other professional organizations, honors and community involvement you feel contribute to your job qualifications<br>
-    <input type="text" id="other-prof" class="other-prof" name="other-prof" data-mapping="customer[other-prof]" maxlength="250" placeholder="">
-  </div>
-
-  <div class="note">
-    <p><em>Please exclude those which by name or character indicate race color, religion, gender, age, disability or national origin.</em></p>
-  </div><br>
-
-
-
-  <div class="form-field">
-    <fieldset>
-      <legend class="required">Have you been convicted of a felony that has not been expunged, sealed, pardoned, annulled, statutorily eradicated or dismissed upon condition of probation in this state or any other state?</legend>
-      <label><input type="radio" class="convicted" name="convicted" data-mapping="customer[convicted]" value="Yes"> Yes</label>
-      <label><input type="radio" class="convicted" name="convicted" data-mapping="customer[convicted]" value="No" checked> No</label>
-    </fieldset>
-  </div>
-
-
-
-  <div class="note">
-    <p><em>Convictions will not be an absolute bar to employment unless provided by law.</em></p>
-  </div>
-
-  <div class="note">
-    <p><em>If you checked "yes", list nature of offense, location and date(s):</em></p>
-  </div>
-
-  <div class="form-field">
-    <input type="text" id="offense" class="offense" name="offense" data-mapping="customer[offense]" maxlength="50" placeholder="Offense">
-  </div>
-
-  <div class="form-field">
-    <input type="text" id="location" class="location" name="location" data-mapping="customer[location]" maxlength="50" placeholder="Location">
-  </div>
-
-  <div class="form-field">Date(s)<br>
-    <input type="date" name="date" data-mapping="customer[date]">
-  </div>
-
-  <br><hr><br>
-
-  <h4>Applicant’s Acknowledgement and Authorization Section</h4>
-
-  <div class="note">
-    <p><em>I understand that Heritage Communities will check any information provided in this application, including former employers, supervisors and schools. I authorize these individuals, companies and institutions to furnish Heritage Communities with any information they have about me, and I release and hold them and Heritage Communities harmless from any liability or damage whatsoever with respect to the release or use of this information. Dependent upon state requirements, I understand I will be required to submit other background-related information so that various background checks can be conducted, including, but not limited to: criminal history, fingerprint clearance, proof of licensure, etc. I understand that if I am selected for hire (or receive an offer for employment), I may be required to submit to a pre-employment, post-accident, reasonable cause or random drug and alcohol test, as a condition of employment in accordance with applicable state law. I authorize Heritage Communities to have access to this information. I understand, where permissible under applicable law, I may be subject to a pre-employment medical examination after receiving conditional offer of employment and must meet the qualifications for the position, with or without reasonable accommodation, before being permitted to commence work with Heritage Communities. I attest that all information disclosed on this application is true and accurate without omissions of any kind. I understand failure to meet these standards could impact my employment, status, up to and including termination. I acknowledge and understand that my employment with Heritage Communities is "at-will" and can be terminated by me or the company at any time and that no one at Heritage Communities has the authority to make exception to this "at-will" rule except in a written agreement signed by an officer of the company.</em></p>
-  </div>
-
-  <div class="form-field">
-    <fieldset>
-      <legend class="required">I agree to all of the above terms and conditions?</legend>
-      <label><input type="radio" class="agree" name="agree" data-mapping="customer[agree]" value="Yes"> Yes</label>
-      <label><input type="radio" class="agree" name="agree" data-mapping="customer[agree]" value="No" checked> No</label>
-    </fieldset>
-  </div>
+</div>
+
+<div class="form-field">
+  <legend class="required">Home Phone</legend>
+  <input type="tel" id="tel" class="tel required" name="tel" placeholder="Home Phone (XXX-XXX-XXXX)*" data-mapping="customer[phone]" minlength="10" maxlength="12" required>
+</div>
+
+<div class="form-field">
+  <legend>Cell Phone</legend>
+  <input type="tel" id="cell-tel" class="cell-tel" name="cell-tel" placeholder="Cell Phone (XXX-XXX-XXXX)" data-mapping="customer[cell-ptel]" minlength="10" maxlength="12">
+</div>
+
+<div class="form-field">
+  <legend class="required">Email</legend>
+  <input type="email" id="email" class="email required" name="email" placeholder="Email*" data-mapping="customer[email]" maxlength="50" required>
+</div>
+
+<div class="form-field">
+  <legend class="required">Position Applying For</legend>
+  <input type="text" id="position" class="position required" name="position" placeholder="Position Applying For*" data-mapping="application[position]" maxlength="50" required>
+</div>
+
+<div class="form-field community">
+  <fieldset id="community">
+
+    <legend class="required">At Which Community/Communities</legend>
+
+    <label><input data-grouprequired="" type="checkbox" data-mapping="application[location]" name="heritage-pointe-community" value="Heritage Pointe (Omaha, Neb.)">Heritage Pointe (Omaha, Neb.)<br></label>
+    <label><input type="checkbox" data-mapping="application[location]" name="heritage-ridge-community" value="Heritage Ridge (Bellevue, Neb.)">Heritage Ridge (Bellevue, Neb.)<br></label>
+    <label><input type="checkbox" data-mapping="application[location]" name="orchard-pointe-community" value="Orchard Pointe at Surprise (Surprise, Ariz.)">Orchard Pointe at Surprise (Surprise, Ariz.)<br></label>
+    <label><input type="checkbox" data-mapping="application[location]" name="orchard-pointe-arrowhead-community" value="Orchard Pointe at Arrowhead (Glendale, Ariz.)">Orchard Pointe at Arrowhead (Glendale, Ariz.)<br></label>
+    <label><input type="checkbox" data-mapping="application[location]" name="heritage-college-community" value="The Heritage at College View (Hastings, Neb.)">The Heritage at College View (Hastings, Neb.)<br></label>
+    <label><input type="checkbox" data-mapping="application[location]" name="heritage-fox-run-community" value="The Heritage at Fox Run (Council Bluffs, Iowa)">The Heritage at Fox Run (Council Bluffs, Iowa)<br></label>
+    <label><input type="checkbox" data-mapping="application[location]" name="heritage-legacy-community" value="The Heritage at Legacy (Omaha, Neb.)">The Heritage at Legacy (Omaha, Neb.)<br></label>
+    <label><input type="checkbox" data-mapping="application[location]" name="heritage-northern-hills-community" value="The Heritage at Northern Hills (Sioux City, Iowa)">The Heritage at Northern Hills (Sioux City, Iowa)<br></label>
+    <label><input type="checkbox" data-mapping="application[location]" name="heritage-sagewood-community" value="The Heritage at Sagewood (Grand Island, Neb.)">The Heritage at Sagewood (Grand Island, Neb.)<br></label>
+    <label><input type="checkbox" data-mapping="application[location]" name="heritage-shalimar-community" value="The Heritage at Shalimar Gardens (Fremont, Neb.)">The Heritage at Shalimar Gardens (Fremont, Neb.)<br></label>
+    <label><input type="checkbox" data-mapping="application[location]" name="heritage-sterling-ridge-community" value="The Heritage at Sterling Ridge (Omaha, Neb.)">The Heritage at Sterling Ridge (Omaha, Neb.)<br></label>
+    <label><input type="checkbox" data-mapping="application[location]" name="heritage-meridian-gardens-community" value="The Heritage at Meridian Gardens (Columbus, Neb.)">The Heritage at Meridian Gardens (Columbus, Neb.)<br></label>
+
+  </fieldset>
+</div>
+
+
+<div class="form-field hours">
+  <fieldset id="hours">
+    <legend class="required">Hours</legend>
+    <label><input data-grouprequired="" type="checkbox" data-mapping="application[hours]" name="full-time-hours" value="FT">Full Time<br /></label>
+    <label><input type="checkbox" data-mapping="application[hours]" name="part-time-hours" value="PT">Part Time<br /></label>
+    <label><input type="checkbox" data-mapping="application[hours]" name="temporary-hours" value="TMP">Temporary<br /></label>
+
+  </fieldset>
+</div>
+
+<div class="form-field shift">
+  <fieldset id="shift">
+    <legend class="required">Shift Preference</legend>
+    <label><input data-grouprequired="" type="checkbox" data-mapping="application[shift]" name="day-shift" value="days">Days<br/></label>
+    <label><input type="checkbox" data-mapping="application[shift]" name="evenings-shift" value="evenings">Evenings<br/></label>
+    <label><input type="checkbox" data-mapping="application[shift]" name="night-shift" value="nights">Nights<br/></label>
+    <label><input type="checkbox" data-mapping="application[shift]" name="any-shift" value="any">Any Shift<br/></label>
+  </fieldset>
+</div>
+
+<div class="form-field">
+  <legend>Desired Hourly Wage</legend>
+  <input type="text" id="desired-wage" class="desired-wage" name="desired-wage" data-mapping="application[desired-wage]" maxlength="50" placeholder="Desired Hourly Wage">
+</div>
+
+<div class="form-field">
+  <legend>Desired Monthly Wage</legend>
+  <input type="text" id="desired-mo-wage" class="desired-mo-wage" name="desired-mo-wage" data-mapping="application[desired-mo-wage]" maxlength="50" placeholder="Desired Monthly Wage">
+</div>
+
+<div class="form-field">
+  <legend>When will you be available to start work?</legend>
+  <input type="text" id="start-date" class="start-date" name="start-date" data-mapping="application[start-date]" maxlength="50" placeholder="When will you be available to start work?">
+</div>
+
+<div class="form-field">
+  <legend>How did you hear about this position?</legend>
+  <input type="text" id="how-you-heard" class="how-you-heard" name="how-you-heard" data-mapping="application[how-you-heard]" maxlength="50" placeholder="How did you hear about this position?">
+</div>
+
+
+<div class="form-field">
+  <fieldset id="applied">
+    <legend class="required">Have you ever applied for a position at Heritage Communities before?</legend>
+    <label><input type="radio" class="have-you-applied" name="have-you-applied" data-mapping="application[have-you-applied]" value="Yes"> Yes</label>
+    <label><input type="radio" class="have-you-applied" name="have-you-applied" data-mapping="application[have-you-applied]" value="No" checked> No</label>
+  </fieldset>
+</div>
+
+<div class="note">
+  <p><em>If yes, please answer the following two questions.</em></p>
+</div>
+
+<div class="form-field">
+  <legend>When?</legend>
+  <input type="text" id="when-applied" class="when-applied" name="when-applied" data-mapping="application[when-applied]" placeholder="When?">
+</div>
+
+<div class="form-field">
+  <legend>Which Position?</legend>
+  <input type="text" id="which-position" class="which-position" name="which-position" data-mapping="application[which-position]" placeholder="Which Position?">
+</div>
+
+<div class="form-field">
+  <fieldset id="years">
+    <legend class="required">Are you 18 years of age?</legend>
+    <label><input type="radio" class="years" name="years" data-mapping="application[years]" value="Yes"> Yes</label>
+    <label><input type="radio" class="years" name="years" data-mapping="application[years]" value="No" checked> No</label>
+  </fieldset>
+</div>
+
+<div class="form-field">
+  <fieldset id="legal">
+    <legend class="required">Are you legally authorized to work in the U.S.?</legend>
+    <label><input type="radio" class="legal" name="legal" data-mapping="application[legal]" value="Yes"> Yes</label>
+    <label><input type="radio" class="legal" name="legal" data-mapping="application[legal]" value="No" checked> No</label>
+  </fieldset>
+</div>
+
+<div class="form-field">
+  <fieldset id="military">
+    <legend class="required">Have you served in the military?</legend>
+    <label><input type="radio" class="military" name="military" data-mapping="application[military]" value="Yes"> Yes</label>
+    <label><input type="radio" class="military" name="military" data-mapping="application[military]" value="No" checked> No</label>
+  </fieldset>
+</div>
+
+<br><hr><br>
+
+<h2>Employment Experience</h2>
+<h3>Current Employer</h3><br>
+
+<div class="form-field">
+  <legend>Name</legend>
+  <input type="text" id="employer-name" class="employer-name" name="employer-name" data-mapping="application[employer-name]" maxlength="30" placeholder="Name">
+</div>
+
+<div class="form-field">
+  <legend>Employer Address</legend>
+  <input type="text" id="employer-address" class="employer-address" name="employer-address" data-mapping="application[employer-address]" maxlength="30" placeholder="Employer Address">
+</div>
+
+<div class="form-field">
+  <legend>Contact Person / Phone</legend>
+  <input type="text" id="employer-contact" class="employer-contact" name="employer-contact" data-mapping="application[employer-contact]" maxlength="30" placeholder="Contact Person / Phone">
+</div>
+
+<div class="form-field">
+  <legend>Date (Month/Year)</legend>
+  <input type="date" id="employer-date" name="employer-date" data-mapping="application[employer-date]">
+</div>
+
+<div class="form-field">
+  <legend>Salary</legend>
+  <input type="text" id="employer-salary" class="employer-salary" name="employer-salary" data-mapping="application[employer-salary]" placeholder="Salary">
+</div>
+
+<div class="form-field">
+  <legend>Work Performed</legend>
+  <textarea id="reason" name="work-performed" data-mapping="application[work-performed]" placeholder="Work Performed" maxlength="250"></textarea>
+</div>
+
+<br><hr><br>
+
+<h3>Former Employer (past 7 years)</h3><br>
+
+<div class="form-field">
+  <legend>Name</legend>
+  <input type="text" id="former-employer-name" class="former-employer-name" name="former-employer-name" data-mapping="application[former-employer-name]" maxlength="30" placeholder="Name">
+</div>
+
+<div class="form-field">
+  <legend>Address</legend>
+  <input type="text" id="former-employer-address" class="former-employer-address" name="former-employer-address" data-mapping="application[former-employer-address]" maxlength="30" placeholder="Address">
+</div>
+
+<div class="form-field">
+  <legend>Contact Person Name</legend>
+  <input type="text" id="former-employer-contact" class="former-employer-contact" name="former-employer-contact" data-mapping="application[former-employer-contact]" maxlength="30" placeholder="Contact Person Name">
+</div>
+
+<div class="form-field">
+  <legend>Contact Person Phone Number (XXX‐XXX‐XXXX)</legend>
+  <input type="tel" id="former-employee-phone" class="former-employee-phone" name="former-employee-phone" data-mapping="application[former-employee-phone]" maxlength="13" placeholder="Contact Person Phone Number (XXX‐XXX‐XXXX)" >
+</div>
+
+<div class="form-field">
+  <legend>Date (Month/Year)</legend>
+  <input type="date" id="former-employer-date" name="former-employer-date" data-mapping="application[former-employer-date]">
+</div>
+
+<div class="form-field">
+  <legend>Salary</legend>
+  <input type="text" id="former-employer-salary" class="former-employer-salary" name="former-employer-salary" data-mapping="application[former-employer-salary]" placeholder="Salary">
+</div>
+
+<div class="form-field">
+  <legend>Work Performed/Reason for Leaving</legend>
+  <input type="text" id="former-reason"  name="former-employer-reason" data-mapping="application[former-employer-year]" placeholder="Work Performed/Reason for Leaving" maxlength="250"></textarea>
+</div>
+
+<br><hr><br>
+
+<h3>Education</h3><br>
+
+<div class="form-field">
+  <legend class="required">Highest Grade Completed</legend>
+  <input type="text" id="highest-grade" class="highest-grade" name="highest-grade" data-mapping="education[highest-grade-completed]" maxlength="50" placeholder="Highest Grade Completed*" required/>
+</div>
+
+<div class="form-field">
+  <legend>Degree/Diploma</legend>
+  <input type="text" id="degree" class="degree" name="degree" data-mapping="education[degree]" maxlength="50" placeholder="Degree/Diploma">
+</div>
+
+<div class="form-field">
+  <legend>Other Training</legend>
+  <input type="text" id="other-training" class="other-training" name="other-training" data-mapping="education[other-training]" maxlength="50" placeholder="Other Training">
+</div>
+
+<br><hr><br>
+
+<h3>Licenses/Certification Held</h3><br>
+
+<div class="form-field">
+  <legend>Type of Licensure</legend>
+  <input type="text" id="licensure" class="licensure" name="licensure" data-mapping="application[licensure]" maxlength="30" placeholder="Type of Licensure">
+</div>
+
+<div class="form-field">
+  <legend>State Issued In</legend>
+  <input type="text" id="licensure-state" class="licensure-state" name="licensure-state" data-mapping="application[licensure-state]" maxlength="30" placeholder="State Issued In">
+</div>
+
+<div class="form-field">
+  <legend>Expiration Date</legend>
+  <input type="text" id="license-expiration" class="license-expiration" name="license-expiration" data-mapping="application[license-expiration]" maxlength="30" placeholder="Expiration Date">
+</div>
+
+<div class="form-field">
+  <legend>Other professional organizations, honors and community involvement you feel contribute to your job qualifications</legend>
+  <input type="text" id="other-prof" class="other-prof" name="other-prof" data-mapping="application[other-prof]" maxlength="250" placeholder="">
+</div>
+
+<div class="note">
+  <p><em>Please exclude those which by name or character indicate race color, religion, gender, age, disability or national origin.</em></p>
+</div><br>
+
+
+
+<div class="form-field">
+  <fieldset id="convicted">
+    <legend class="required">Have you been convicted of a felony that has not been expunged, sealed, pardoned, annulled, statutorily eradicated or dismissed upon condition of probation in this state or any other state?</legend>
+    <label><input type="radio" class="convicted" name="convicted" data-mapping="application[convicted]" value="Yes"> Yes</label>
+    <label><input type="radio" class="convicted" name="convicted" data-mapping="application[convicted]" value="No" checked> No</label>
+  </fieldset>
+</div>
+
+
+
+<div class="note">
+  <p><em>Convictions will not be an absolute bar to employment unless provided by law.</em></p>
+</div>
+
+<div class="note">
+  <p><em>If you checked "yes", list nature of offense, location and date(s):</em></p>
+</div>
+
+<div class="form-field">
+  <legend>Offense</legend>
+  <input type="text" id="conviction-offense" class="offense" name="offense" data-mapping="application[conviction-offense]" maxlength="50" placeholder="Offense">
+</div>
+
+<div class="form-field">
+  <legend>Location</legend>
+  <input type="text" id="conviction-location" class="location" name="location" data-mapping="application[conviction-location]" maxlength="50" placeholder="Location">
+</div>
+
+<div class="form-field">
+  <legend>Date(s)</legend>
+  <input type="date" id="conviction-date" name="date" data-mapping="application[conviction-date]">
+</div>
+
+<br><hr><br>
+
+<h3>Applicant’s Acknowledgement and Authorization Section</h3>
+
+<div class="note">
+  <p><em>I understand that Heritage Communities will check any information provided in this application, including former employers, supervisors and schools. I authorize these individuals, companies and institutions to furnish Heritage Communities with any information they have about me, and I release and hold them and Heritage Communities harmless from any liability or damage whatsoever with respect to the release or use of this information. Dependent upon state requirements, I understand I will be required to submit other background-related information so that various background checks can be conducted, including, but not limited to: criminal history, fingerprint clearance, proof of licensure, etc. I understand that if I am selected for hire (or receive an offer for employment), I may be required to submit to a pre-employment, post-accident, reasonable cause or random drug and alcohol test, as a condition of employment in accordance with applicable state law. I authorize Heritage Communities to have access to this information. I understand, where permissible under applicable law, I may be subject to a pre-employment medical examination after receiving conditional offer of employment and must meet the qualifications for the position, with or without reasonable accommodation, before being permitted to commence work with Heritage Communities. I attest that all information disclosed on this application is true and accurate without omissions of any kind. I understand failure to meet these standards could impact my employment, status, up to and including termination. I acknowledge and understand that my employment with Heritage Communities is "at-will" and can be terminated by me or the company at any time and that no one at Heritage Communities has the authority to make exception to this "at-will" rule except in a written agreement signed by an officer of the company.</em></p>
+</div>
+
+<div class="form-field">
+  <fieldset id="terms">
+    <legend class="required">I agree to all of the above terms and conditions?</legend>
+    <label><input type="radio" class="agree" name="agree" data-mapping="application[agree-to-terms]" value="Yes"> Yes</label>
+    <label><input type="radio" class="agree" name="agree" data-mapping="application[agree-to-terms]" value="No" checked> No</label>
+  </fieldset>
+</div>
 
 <input type="submit" value="Send" /><br>
 <span class="forminstruction"><span style="color:red;">*</span> Required Field</span>
